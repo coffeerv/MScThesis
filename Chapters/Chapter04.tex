@@ -1,0 +1,55 @@
+%************************************************
+\chapter{Discusión, Conclusiones y Perspectivas}\label{ch:conclusiones}
+%************************************************
+
+% While it has not been possible to provide definite answers to the questions (Unsuccessful experiment, but I still hope to get it published)
+% Three of the samples were chosen for detailed study (The other results didn't make any sense)
+% A highly significant area for exploratory study (A totally useless topic selected by my commitee)
+% In my experience / in case after case / in a series of cases
+% Correct within an order of magnitude / Can be regarded good within some range of validity
+% It is clear that much additional work will be required before a complete understanding of this phenomenon occurs
+% It is hoped that this study will stimulate further investigations in this field
+
+Este capítulo discute los resultados del trabajo que fueron expuestos en el capítulo anterior. Posteriormente presenta algunas conclusiones, y al final menciona ideas que podrían ser de utilidad para extender y refinar la investigación iniciada en este trabajo. 
+
+\section{Discusión}
+En cuanto al modelo Booleano de tres nodos, es interesante resaltar que la relación \emph{parámetros a estimar}/\emph{tipos de mediciones} es alta ($1/3$). Contar con un tipo de medición para un sistema de 3 componentes parece permitir la estimación de parámetros, aún con una estrategia de exploración bastante pobre como la búsqueda aleatoria.
+
+El hecho de que la búsqueda aleatoria se haya comportado mejor que los algoritmos genéticos bien podría deberse a que algunos de los parámetros sugeridos para el algoritmo genérico resultaran inadecuados.%En particular el parámetro de mutación = 0.2 es anormalmente alto.
+
+Con lo que respecta al modelo de la vía de señalización de speract, la relación \emph{parámetros a estimar}/\emph{tipos de mediciones} es, al contrario del modelo de 3 nodos, muy baja ($1/26$). Realizar ajustes de parámetros en este caso es más complicado si no se cuenta con más tipos de mediciones.
+
+Estos resultados pueden deberse a que las funciones objetivo imponen restricciones sobre el comportamiento del nodo de $Ca^{2+}$, si bien no logran calificar adecuadamente la dinámica de otros nodos y por lo tanto restringirlos a tener un comportamiento fisiológicamente válido. En este sentido, de acuerdo a la metodología presentada es posible encontrar modelos con un comportamiento matemáticamente correcto pero cuya interpretación biológica no es necesariamente válida. 
+
+Es necesario contar entonces con una metodología que: incorpore más tipos de mediciones experimentales para tiempos largos y use funciones objetivo que califiquen el comportamiento de varios nodos; imponga restricciones a priori a las soluciones posibles. 
+
+En este trabajo no se incorporaron otros tipos de mediciones experimentales para tiempos largos por carecer de ellas. Algunos avances en las técnicas experimentales necesarias para realizar otras mediciones podrían en un futuro arrojar datos que sea posible incluir en el diseño de otras funciones objetivo.
+
+La imposición a priori de restricciones a las soluciones posibles pueden generalmente es un evento brusco dentro del proceso de búsqueda que no siempre es favorable, ya que puede resultar en la no exploración de ciertas zonas del espacio de búsqueda por efecto de que los agentes sean repelidos de la región donde opera la restricción y por azar sean llevados a otras regiones distintas. La consecuencia directa es el aumento del tiempo de búsqueda.
+
+
+\section{Conclusiones}
+
+\paragraph {La transformación de modelos discretos en semicontinuos (ecuaciones de Glass) basada en estimación de parámetros es posible}Se mostró que es posible la transformación de modelos discretos en semicontinuos mediante un ejemplo consistente en una pequeña red Booleana sincronizada compuesta por tres nodos. En este caso solo fue necesario estimar tres parámetros y se contó con un solo tipo de medición ``experimental'' o señal original contra la cual comparar. Para este tipo de problema, la elección de estrategia de búsqueda no tiene mayor consecuencia, ya que es posible obtener resultados satisfactorios aún con la búsqueda aleatoria. El índice de pendiente \textsc{(si)} mostró ser una buena medida de comparación entre señales.  
+
+\paragraph {La transformación de un modelo discreto en semicontinuo produce buenos resultados en sistemas donde la relación \emph{parámetros a estimar}/\emph{tipos de mediciones} es alta}El modelo Booleano de 3 nodos muestra que el paso de un formalismo de modelación a otro puede ser exitoso cuando se cuenta con datos suficientes contra los cuales comparar el modelo, en relación a la cantidad de parámetros a estimar. Por el contrario, en modelos como el de la vía señalización, en los que la cantidad de parámetros es mucho mayor que los criterios contra los cuales comparar, es difícil encontrar resultados biológicamente relevantes.
+
+\paragraph {Son necesarias metodologías de estimación de parámetros más robustas} Si bien este trabajo no presenta una respuesta definitiva en términos de mostrar una metodología generalizada para la transformación de modelos discretos en semicontinuos, %es cierto que ha aportado evidencia de que estos últimos resultan un buen punto intermedio entre los discretos y los puramente continuos.Además, 
+pone de manifiesto la necesidad e importancia de contar con metodologías de estimación de parámetros más robustas, que puedan ser aplicadas a problemas donde se requiere encontrar una gran cantidad de parámetros a partir de pocas mediciones experimentales.
+
+\section{Perspectivas y trabajo futuro}
+
+Este trabajo se desarrolló bajo el supuesto de que la transformación de modelos discretos en semicontinuos podía realizarse mediante el empleo de técnicas de estimación de parámetros, particularmente aquellas basadas en estrategias evolutivas. Las funciones objetivo utilizadas se basan en criterios simples de correlación o minimización de diferencias. 
+
+Existe un marco teórico más desarrollado para la solución de problemas inversos, que cuenta con técnicas elaboradas para el problema de discriminación de modelos. Una técnica que puede resultar prometedora para la solución de este tipo de problemas puede ser la \textsc{Regularización Promotora de Dispersión o Sparsity Enforcing Regularization}, \citeauthor{Engl2009} \citep{Engl2009}, en donde se busca hacer uso de criterios estadísticos para la comparación entre mediciones experimentales y modelos.
+
+Otra posibilidad que valdría la pena explorar consiste en modificar el modelo discreto de modo que contenga menos nodos y por lo tanto haya menos parámetros que estimar. Hasta este momento cuál es un buen criterio general de reducción de modelos discretos sigue siendo una pregunta abierta. Sin embargo, se ha explorado la posibilidad de utilizar criterios de robustez de las redes para separar nodos esenciales para mantener la dinámica y función de la red de aquellos nodos que podrían parecer redundantes.
+
+Usando este último criterio, se ha logrado plantear un modelo discreto de la vía de señalización de speract con 11 nodos. Queda abierto el determinar si a partir de este modelo reducido y los datos experimentales con que se cuenta hasta el momento, es posible ajustar el comportamiento de un modelo semicontinuo de manera que la interpretación biológica del modelo sea más completa que lo alcanzado hasta el momento.
+
+%Una alternativa a otro tipo de comparaciones es la \textsc{Regularización Promotora de Dispersión o Sparsity Promoting Regularization}, \citeauthor{Engl2009}. La idea consiste en imputar un modelo estadístico a la comparación de mediciones experimentales con modelos de ecuaciones diferenciales. Los operadores diferenciales que no incluyen componentes estocásticos suelen producir trayectorias por lo general suaves, en contraste con la variabilidad existente en las series de tiempo de las mediciones experimentales. 
+%
+%Sea $\mathbf{p}$ el vector de parámetros de un conjunto de ecuaciones diferenciales. Sea $\Phi(\mathbf{p},t)$ la trayectoria solución dependiente del tiempo $t$ y del vector de parámetros $\mathbf{p}$. Sea $\Psi(\Phi(\mathbf{p},t))$ un modelo Gaussiano del ruido de las mediciones experimentales con desviación estándar constante. El objetivo de añadir $\Phi$  es imputar un criterio estadístico a la trayectoria solución de la ecuación diferencial, y hacer entonces una comparación entre un modelo estadísticos y un conjunto de datos.
+
+% It is hoped that this study will stimulate further investigations in this field
+
