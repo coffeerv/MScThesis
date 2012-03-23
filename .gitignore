@@ -1,0 +1,17 @@
+# Ignore whatever file is not a TeX/LaTeX, BIBTeX or image file.
+# Include the pdf output though, for the purpose of usefulness
+
+*.aux
+
+*.bak
+*.bbl
+*.blg
+*.brf
+*.lof
+*.log
+*.lol
+*.lot
+*.out
+*.synctex.gz
+*.toc
+Examples/*

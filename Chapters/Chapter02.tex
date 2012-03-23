@@ -11,7 +11,7 @@ Resulta interesante que aún a este nivel grueso de resolución temporal y de es
 
 \section{Limitaciones del modelo discreto}
 
-Una de las limitaciones de dicho modelo consiste en que el sistema es sincronizado, es decir, todos los nodos actualizan su estado con el mismo esquema temporal. Esta actualización sincronizada es particularmente válida en tanto que el estado del nodo es un promedio en un intervalo de tiempo cuya duración es mayor que el tiempo en el que se dan las reacciones bioquímicas de la red. Al mismo tiempo que proporciona validez a una aproximación sincronizada, el describir al sistema en intervalos de actualización largos es también una desventaja. Finalmente, la discretización de las variables de estado es adecuada para tener una idea general --no particular-- de la dinámica del sistema. 
+Una de las limitaciones de dicho modelo consiste en que el sistema es sincronizado, es decir, todos los nodos actualizan su estado con el mismo esquema temporal. Esta actualización sincronizada es particularmente válida en tanto que el estado del nodo es un promedio en un intervalo de tiempo cuya duración es mayor que el tiempo en el que se dan las reacciones bioquímicas de la red. Al mismo tiempo que proporciona validez a una aproximación sincronizada, el describir al sistema en intervalos de actualización largos es también una desventaja, puesto que solo es posible realizar comparaciones con experimentos a nivel cualitativo dadas las diferencias de escala temporal entre experimento y modelo. Finalmente, la discretización de las variables de estado es adecuada para tener una idea general --no particular-- de la dinámica del sistema. 
 
 \section{Ecuaciones de Glass}
 
@@ -29,7 +29,7 @@ Es posible escribirlo también como
 donde $\tau_i=1$. Si $\tau_i \rightarrow 0$, haciendo un desarrollo en serie de Taylor de $\sigma_i(t+\tau_i)$ hasta la derivada de primer orden, para posteriormente despejar esa derivada se obtiene
 
 \begin{equation}
-\frac{\sigma_i(t)}{dt} = \frac{1}{\tau_i} [\sigma_i(t+\tau_i) - \sigma_i(t)]
+\frac{d\sigma_i(t)}{dt} = \frac{1}{\tau_i} [\sigma_i(t+\tau_i) - \sigma_i(t)]
 \end{equation}
 \\
 y sustituyendo $\sigma_i(t+\tau_i)$ por 
@@ -41,17 +41,17 @@ F_i[H(\sigma_{i_1}(t), \theta_{i_1}), H(\sigma_{i_2}(t), \theta_{i_2}),\ldots, H
 obtenemos 
 
 \begin{equation}
-\frac{\sigma_i(t)}{dt} = \frac{1}{\tau_i} (F_i[H(\sigma_{i_1}(t), \theta_{i_1}), H(\sigma_{i_2}(t), \theta_{i_2}),\ldots, H(\sigma_{i_k}(t), \theta_{i_k})] - \sigma_i(t))
+\frac{d\sigma_i(t)}{dt} = \frac{1}{\tau_i} (F_i[H(\sigma_{i_1}(t), \theta_{i_1}), H(\sigma_{i_2}(t), \theta_{i_2}),\ldots, H(\sigma_{i_k}(t), \theta_{i_k})] - \sigma_i(t))
 \end{equation} 
 \\
-donde $\frac{1}{\tau_i}$ es el inverso del tamaño del intervalo donde se hace el desarrollo en serie de Taylor, $H(\sigma_{i_1}, \theta_{i_1})$ es una función escalón que discretiza los valores de estado del nodo $i_1$ usando un valor de umbral $\theta_{i_1}$. Esta discretización es necesaria puesto que la variable de estado es ahora una variable continua, al igual que el tiempo, mientras que $F_i$ sigue siendo el mismo mapeo discreto.
+donde $\frac{1}{\tau_i}$ es el inverso del tamaño del intervalo donde se hace el desarrollo en serie de Taylor y $H(\sigma_{i_1}, \theta_{i_1})$ es una función escalón que discretiza los valores de estado del nodo $i_1$ usando un valor de umbral $\theta_{i_1}$. Esta discretización es necesaria puesto que la variable de estado es ahora una variable continua, al igual que el tiempo. Todos los $F_i$ son los mapeos del modelo discreto a partir del cual se construyeron las ecuaciones de Glass.
 
 Mediante este procedimiento, es posible contar con una descripción semicontinua de la dinámica del sistema, en tanto que la derivada de cada nodo no es única sino que depende del valor de la función discreta en cada intervalo de tamaño $\tau_i$. A este tipo de ecuaciones se les conoce también como \emph{Piecewise Linear Differential Equations}, o Ecuaciones Diferenciales Lineales por Pedazos.
 %% (Conviene tener una gráfica que ilustre por qué esto es realmente un mapeo piecewise linear, o de manera equivalente mostrar formalmente una de las ecuaciones diferenciales como un mapeo)
 
 \subsection{Ventajas y desventajas}
 
-El beneficio directo de usar este formalismo es contar con un refinamiento de la descripción proporcionada por el modelo discreto, a la par que se construye este refinamiento a partir del modelo existente. Dado que el modelo discreto es construído a partir de observaciones y conocimiento biológico, las ecuaciones de Glass no son un formalismo \emph{ad hoc} que reproduce el comportamiento de un sistema a través de arbitrariamente ajustar trayectorias, sino que se basan en un conjunto de observaciones y conocimiento previo.
+El beneficio directo de usar este formalismo es contar con un refinamiento de la descripción proporcionada por el modelo discreto, a la par que se construye este refinamiento a partir del modelo existente. Dado que el modelo discreto es construido a partir de observaciones y conocimiento biológico, las ecuaciones de Glass no son un formalismo \emph{ad hoc} que reproduce el comportamiento de un sistema a través de arbitrariamente ajustar trayectorias, sino que se basan en un conjunto de observaciones y conocimiento previo.
 
 El costo por usar este formalismo radica en la estimación de los valores de umbral para cada nodo de la red. En el caso de que se quiera un modelo sincronizado, los tiempos característicos, que denotamos como $\alpha_i=\frac{1}{\tau_i}$ pueden establecerse todos iguales. En particular, el modelo discreto en tiempo se recupera al establecer el tiempo característico en $\tau_i = 1,\ \forall i$.
 
@@ -59,7 +59,7 @@ El costo por usar este formalismo radica en la estimación de los valores de umb
 
 Al plantear un modelo semicontinuo basado en ecuaciones de Glass es necesario hacer estimación de parámetros. Estos parámetros son los umbrales de activación de cada nodo, además de los inversos del tamaño de cada uno de los intervalos de tiempo.
 
-Los parámetros deben elegirse de modo que la dinámica del sistema y de los nodos en particular sea coherente desde un punto de vista biológico. En el caso de la vía de señalización, objeto de estudio de esta tesis, los parámetros a encontrar fueron aquellos tales que reprodujeran el comportamiento del calcio intracelular observado experimentalmente. Se tomó en consideración solamente la similitud en la dinámica de calcio del sistema debido a que este es el único tipo de dato experimental que cuenta con mediciones largas. Un ejemplo de estas mediciones se muestra en la figura \ref{fig:fluorescencia}.
+Los parámetros deben elegirse de modo que la dinámica del sistema y de los nodos en particular sea coherente desde un punto de vista biológico. En el caso de la vía de señalización, objeto de estudio de esta tesis, los parámetros a encontrar fueron aquellos tales que reprodujeran el comportamiento del calcio intracelular observado experimentalmente. Se tomó en consideración solamente la similitud en la dinámica de calcio del sistema debido a que éste es el único tipo de dato experimental que cuenta con mediciones largas. Un ejemplo de estas mediciones se muestra en la figura \ref{fig:fluorescencia}.
 
 En este sentido, el problema de construir un modelo semicontinuo usando ecuaciones de Glass se reduce, después de escribir las ecuaciones, en un problema de estimación de parámetros. En tanto problema de optimización, es necesario definir una función objetivo que minimizar (o maximizar) y contar con una estrategia de exploración del espacio de parámetros. 
 
@@ -69,19 +69,21 @@ De manera formal, sea $f(p)$ la función de costo a minimizar (o función de ada
 
 Es necesario establecer una noción de distancia para determinar si la serie temporal proveniente de los experimentos de fluorescencia de calcio corresponde con la trayectoria del nodo de calcio del modelo de ecuaciones semicontinuas.
 
-Existen varias maneras de comparar series de tiempo, desde técnicas generales y ampliamente usadas como el \emph{Error Cuadrático Medio} \textsc{(mse)} \citep{msewiki}, el \emph{Coeficiente de Correlación de Pearson} \citep{pearsoncorrwiki}, hasta aquellas que fueron diseñadas con el objetivo de establecer la similitud entre series de tiempo surgidas de procesos biológicos, como el \emph{Índice de Pendiente o Slope Index} \textsc{(si)} \citeauthor{Cho2006} \citep{Cho2006}.% Además se pueden usar algunos otros criterios que califiquen la similitud de dos trayectorias basados no solo en la distancia sino en propiedades específicas de un conjunto de parámetros que influyen sobre esa dinámica. En este último grupo se encuentra la \emph{Regularización Promotora de Dispersión o Sparsity Promoting Regularization} \citeauthor{Engl2009}.%(Van der Boos, Engels 2009, Vogel).
+Existen varias maneras de comparar series de tiempo, desde técnicas generales y ampliamente usadas como el \emph{Error Cuadrático Medio} \textsc{(mse)} \citep{msewiki}, el \emph{Coeficiente de Correlación de Pearson} \citep{pearsoncorrwiki}, hasta aquéllas que fueron diseñadas con el objetivo de establecer la similitud entre series de tiempo surgidas de procesos biológicos, como el \emph{Índice de Pendiente o Slope Index} \textsc{(si)} \citeauthor{Cho2006} \citep{Cho2006}.% Además se pueden usar algunos otros criterios que califiquen la similitud de dos trayectorias basados no solo en la distancia sino en propiedades específicas de un conjunto de parámetros que influyen sobre esa dinámica. En este último grupo se encuentra la \emph{Regularización Promotora de Dispersión o Sparsity Promoting Regularization} \citeauthor{Engl2009}.%(Van der Boos, Engels 2009, Vogel).
 
 \subsubsection{Error Cuadrático Medio (MSE)}
 
 
-El \textsc{mse} \citep{msewiki} es el valor esperado de la diferencia entre las observaciones y la respuesta, trayectoria o dinámica predecida por un modelo. Al ser minimizado, es posible discriminar entre distintos modelos, estableciendo cuál de entre un conjunto de modelos ajusta mejor, es decir, explica mejor los datos. El \textsc{mse} está dado por $E[\hat{(\theta} - \theta)^2]$.
+El \textsc{mse} \citep{msewiki} es el cuadrado del valor esperado de la diferencia entre las observaciones y la respuesta, trayectoria o dinámica predicha por un modelo. Al ser minimizado, es posible discriminar entre distintos modelos, estableciendo cuál de entre un conjunto de modelos ajusta mejor, es decir, explica mejor los datos. El \textsc{mse} está dado por $E[\hat{(\theta} - \theta)^2]$.
 
 \subsubsection{Coeficiente de correlación de Pearson}
 
-El Coeficiente de Correlación de Pearson \citep{pearsoncorrwiki} es una medida de la correlación (dependencia lineal) entre dos variables $X$ y $Y$, denotado por $r \in [-1, 1]$, donde
+El Coeficiente de Correlación de Pearson \citep{pearsoncorrwiki} es una medida de la correlación (dependencia lineal) entre dos variables aleatorias $X$ y $Y$, denotado por $r \in [-1, 1]$, está dado por
 \begin{equation} 
 r = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})} {\sqrt{\sum_{i=1}^n (X_i - \bar{X})^2} \sqrt{\sum_{i=1}^n (Y_i - \bar{Y})^2}}
 \end{equation}
+\\
+donde $\bar{X}$ y $\bar{Y}$ son los promedios de $X$ y $Y$, respectivamente, y $X_i$ y $Y_i$ denotan la $i$ésima medición experimental de $X$ y $Y$, respectivamente.
 
 \subsubsection{Índice de Pendiente (SI)}
 
@@ -110,12 +112,12 @@ Una vez que se tiene definida una función objetivo o función de costo que perm
 
 \subsection{Tipos de exploración}
 
-Además de la búsqueda al azar, existen dos estrategias generales para resolver problemas de optimización: aquellas basadas en la diferenciabilidad del espacio de soluciones, y aquellas basadas en el uso de criterios heurísticos.
+Además de la búsqueda al azar, existen dos estrategias generales para resolver problemas de optimización: aquéllas basadas en la diferenciabilidad de la función de costo, y aquéllas basadas en el uso de criterios heurísticos.
 Un ejemplo clásico de un método basado en diferenciabilidad es el de Gradiente Conjugado, \citeauthor{numrecipesc} \citep{numrecipesc}. Entre los métodos populares basados en criterios heurísticos se encuentran el \textsc{Recocido Simulado}, \citeauthor{Kirkpatrick1983} \citep{Kirkpatrick1983}, y los \textsc{Algoritmos Genéticos}, \citeauthor{Goldberg1989} \citep{Goldberg1989}.
 
 Las métodos basados en diferenciabilidad suelen usarse cuando se conoce con un buen nivel de detalle el espacio de soluciones, y en ese caso permiten encontrar los puntos extremos globales fácilmente. Sin embargo, una mala elección del punto inicial de búsqueda puede resultar en que estos algoritmos de optimización queden atrapados en un punto extremo local. Hacer malas elecciones del punto inicial de búsqueda suele ser común cuando no se conoce muy a fondo el espacio de soluciones. Por ello, estos métodos son útiles para refinar soluciones, es decir, para aumentar la precisión de una solución una vez que se cree que se está cerca de un punto extremo global, o al menos, cerca de un punto cuyo valor es cercano al punto extremo global.
 
-Por otro lado, los métodos de búsqueda basados en heurísticas explotan propiedades del problema que no necesariamente están relacionadas con la diferenciabilidad. Además, se ha observado que son más resistentes a quedar atrapados en puntos extremos locales, \citeauthor{BangaMoles2003} \citep{BangaMoles2003}, \citeauthor{Storn1997} \citep{Storn1997}, debido a que incluyen un subprocedimiento que permite variar de una u otra forma las soluciones propuestas, independientemente de si esta solución mejora o no el costo de la función objetivo. Por lo tanto, estos métodos no son tan sensibles a una mala elección del punto o puntos iniciales de búsqueda, y no es necesario conocer la forma específica del espacio de soluciones.
+Por otro lado, los métodos de búsqueda basados en criterios heurísticos explotan propiedades del problema que no necesariamente están relacionadas con la diferenciabilidad. Además, se ha observado que son más resistentes a quedar atrapados en puntos extremos locales, \citeauthor{BangaMoles2003} \citep{BangaMoles2003}, \citeauthor{Storn1997} \citep{Storn1997}, debido a que incluyen un subprocedimiento que permite variar de una u otra forma las soluciones propuestas, independientemente de si esta solución mejora o no el costo de la función objetivo. Por lo tanto, estos métodos no son tan sensibles a una mala elección del punto o puntos iniciales de búsqueda, y no es necesario conocer la forma específica del espacio de soluciones.
 
 En este trabajo, las estrategias de exploración utilizadas fueron \textsc{Búsqueda Aleatoria}, \textsc{Algoritmos Genéticos} y \textsc{Evolución Diferencial}, cada uno de los cuales se describe a continuación.
 
@@ -158,9 +160,7 @@ La elección de $F$, $CR$ y $NP$ puede tener un impacto significativo en el dese
 
 \section{Justificación del presente trabajo}
 
-Dado que las mediciones experimentales arrojan datos continuos tomados con una frecuencia bastante mayor que la descripción del modelo discreto, la comparación entre dicho modelo y las mediciones experimentales se puede hacer hasta un nivel de detalle limitado. Sería deseable contar con un modelo que pudiera dar una descripción continua en tiempo y estado, además de incorporar asincronía, es decir, que cada componente o nodo de la red actualice su estado de acuerdo a su propio tiempo característico de reacción.
-
-Para este fin bien podría plantearse un modelo basado en \textsc{EDOs}. Sin embargo, para hacerlo sería necesario conocer un conjunto de parámetros relacionados directamente con magnitudes físicas y bioquímicas, a saber: las concentraciones de cada componente de la vía de señalización; las tasas de asociación y disociación de cada complejo bioquímico; la cooperatividad de las reacciones bioquímicas, es decir, la cantidad de moléculas necesarias de un compuesto para que este reaccione con otro. Sin embargo, por lo general estos parámetros no son conocidos en su totalidad y su estimación experimental es o bien costosa o complicada desde el punto de vista de diseño y ejecución del experimento o ambas. Si bien se puede hacer la estimación de algunos de estos parámetros a través de modelos computacionales y de optimización, se requiere de cierto conocimiento previo del sistema para poder llevar a cabo la estimación de manera más dirigida y reducir el espacio de búsqueda.
+Dado que las mediciones experimentales arrojan datos continuos tomados con una frecuencia bastante mayor que la descripción del modelo discreto, la comparación entre dicho modelo y las mediciones experimentales se puede hacer hasta un nivel de detalle limitado. Sería deseable contar con un modelo que pudiera dar una descripción continua en tiempo y estado, además de incorporar asincronía, es decir, que cada componente o nodo de la red actualice su estado de acuerdo a su propio tiempo característico de reacción. Para este fin bien podría plantearse un modelo basado en \textsc{EDOs}. Sin embargo, para hacerlo sería necesario conocer un conjunto de parámetros relacionados directamente con magnitudes físicas y bioquímicas, a saber: las concentraciones de cada componente de la vía de señalización; las tasas de asociación y disociación de cada complejo bioquímico, y finalmente, la cooperatividad de las reacciones bioquímicas, es decir, la cantidad de moléculas necesarias de un compuesto para que este reaccione con otro. Sin embargo, por lo general estos parámetros no son conocidos en su totalidad y su estimación experimental es costosa, complicada desde el punto de vista de diseño y ejecución del experimento, o ambas. Si bien se puede hacer la estimación de algunos de estos parámetros a través de modelos computacionales y de optimización, se requiere de cierto conocimiento previo del sistema para poder llevar a cabo la estimación de manera más dirigida y reducir el espacio de búsqueda.
 
 En el caso particular de esta red de señalización, no todos estos parámetros e información son conocidos, por lo que como primera aproximacion se desarrolló el modelo discreto antes mencionado. Un modelo basado en las ecuaciones de Glass constituye un refinamiento a la descripción del sistema proporcionada por el modelo discreto.
 

@@ -96,8 +96,13 @@ El modelo semicontinuo de la vía de señalización de speract se implementó pl
 Y la ecuación de Glass correspondiente es:
 
 \begin{equation}\label{eqn:glasscGMP}
-\frac{dcGMP}{dt} = \alpha_{cGMP} [F(H(GC - \theta_{GC}), H(PDE - \theta_{PDE}), H(cGMP - \theta_{cGMP}) ) - GC]
+\frac{dcGMP}{dt} = \alpha_{cGMP} [F_{cGMP}(\widehat{GC}, \widehat{PDE}, \widehat{cGMP}) - cGMP]
 \end{equation}
+\\
+donde
+$$\widehat{GC} = H(GC - \theta_{GC})$$ $$\widehat{PDE} = H(PDE - \theta_{PDE})$$ y $$\widehat{cGMP} = H(cGMP - \theta_{cGMP})$$
+\\
+son los valores discretizados de las variables continuas $GC$, $PDE$ y $cGMP$, respectivamente.
 
 El problema de estimación de parámetros en este caso consiste en ajustar el valor de 26 parámetros de umbral $\theta_i$ (22 para los nodos binarios y 4 extras para los nodos que tienen un valor terciario), en el caso de un sistema sincronizado donde todos los parámetros $\alpha_i=x$, $x \in [0,T_{max}]$, donde $T_{max}$ es el tiempo característico más grande del sistema. 
 
