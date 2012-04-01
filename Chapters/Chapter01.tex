@@ -1,10 +1,11 @@
 %*****************************************
-\chapter{Antecedentes}\label{ch:antecedentes}
+\chapter{Introducci\'on}\label{ch:antecedentes}
 %*****************************************
 
-En este capítulo se discute brevemente el fenómeno biológico que se quiere entender a través de modelación computacional. Posteriormente se discuten un modelo de red Booleana de tres nodos que se usó para ganar entendimiento de cómo transformar un modelo discreto en uno semicontinuo, así como del modelo de la vía de señalización basado en funciones discretas. Este último modelo es un antecedente directo del semicontinuo desarrollado en este trabajo.
+%En este capítulo se discute brevemente el fenómeno biológico que se quiere entender a través de modelación computacional. Posteriormente se discuten un modelo de red Booleana de tres nodos que se usó para ganar entendimiento de cómo transformar un modelo discreto en uno semicontinuo, así como del modelo de la vía de señalización basado en funciones discretas. Este último modelo es un antecedente directo del semicontinuo desarrollado en este trabajo.
+Aquí debe de aparecer el nuevo resumen del capítulo. Está pendiente de agregarse debido a la reestructuración de la tesis solicitada por José Díaz.
 
-\section{Antecedentes biol\'ogicos}
+\section{La v\'ia de se\~nalizaci\'on de speract}
 
 La fertilización es un proceso crucial para la transmisión de la vida, que requiere el encuentro y fusión de los gametos. Para que este encuentro tenga lugar, el espermatozoide debe valerse de una intrincada maquinaria en su flagelo que le permita nadar en busca del óvulo. En algunas especies, el óvulo secreta una sustancia quimioatrayente que guía al esperma hacia él. En el caso particular del erizo de mar, esta sustancia es un decapéptido llamado \emph{speract}, \citeauthor{SUZUKI:1995gp} \citep{SUZUKI:1995gp}, \citeauthor{Hansbrough:1981vk} \citep{Hansbrough:1981vk}, el cual se une a un receptor específico en la membrana del flagelo del espermatozoide. La unión de speract con su receptor activa una red de señalización que produce oscilaciones en la concentración interna de algunos iones, de los cuales el principal es el calcio \citeauthor{Darszon2008} \citep{Darszon2008}. 
 
@@ -34,7 +35,7 @@ Vistos a detalle, los eventos de la vía de señalización que se muestra en la 
 
 El incremento del $pH_i$ disminuye la actividad de $GC$ a la vez que activa una \textsc{adenilato ciclasa soluble} $(sAC)$, con la consecuente producción de \textsc{Adenosín Monofosfato Cíclico} $(cAMP)$, \citeauthor{Nishigaki:2004p4516} \citep{Nishigaki:2004p4516}, \citeauthor{Cook:1993ul} \citep{Cook:1993ul}, \citeauthor{Beltran:1996fd} \citep{Beltran:1996fd}. Este último estimula un \textsc{canal de calcio dependiente de cAMP} $(cAMPCC)$ y el canal $HCN$ previamente activado, lo cual tiende a repolarizar el potencial de membrana \citeauthor{Strunker:2006tk} \citep{Strunker:2006tk}, \citeauthor{Kaupp:2003p4518} \citep{Kaupp:2003p4518}, \citeauthor{Nishigaki:2004p4516} \citep{Nishigaki:2004p4516}, \citeauthor{Rodriguez:2003do} \citep{Rodriguez:2003do}, \citeauthor{Gauss:1998de} \citep{Gauss:1998de}. Esta repolarización abre los canales $HVA$ y $LVA$ causando una despolarización y un incremento del $[Ca^{2+}]_i$, \citeauthor{Strunker:2006tk} \citep{Strunker:2006tk}, \citeauthor{GranadosGonzalez:2005ia} \citep{GranadosGonzalez:2005ia}, \citeauthor{Kaupp:2003p4518} \citep{Kaupp:2003p4518},\citeauthor{Bohmer:2005ik} \citep{Bohmer:2005ik}, \citeauthor{Wood:2003p4517} \citep{Wood:2003p4517}, \citeauthor{Nishigaki:2004p4516} \citep{Nishigaki:2004p4516}, \citeauthor{Wood:2005gg} \citep{Wood:2005gg}. Finalmente, la vía de señalización se inicia de nuevo, posiblemente a través de un \textsc{canal de} $Ca^{2+}$ \textsc{dependiente de} $Cl^-$ $(CaCC)$ y un \textsc{canal de} $Ca^{2+}$ \textsc{dependiente de} $K^+$ $(CaKC)$ \citeauthor{Wood:2003p4517} \citep{Wood:2003p4517}, \citeauthor{Wood2007} \citep{Wood2007}, \citeauthor{Greenwood:2007hg} \citep{Greenwood:2007hg}, que se abren cuando la concentración de $[Ca^{2+}]_i$ es alta. Los mecanismos pasivos y constantes de extrusión de $Ca^{2+}$, tales como \textsc{bombas de calcio} $(CaP)$ y $NCE$, mantienen los niveles basales de $[Ca^{2+}]_i$ \citeauthor{Nishigaki:2004p4516} \citep{Nishigaki:2004p4516}, \citeauthor{Su:2002fk} \citep{Su:2002fk}, \citeauthor{Rodriguez:2003do} \citep{Rodriguez:2003do}, \citeauthor{Okunade:2004jw} \citep{Okunade:2004jw}. El mecanismo anteriormente descrito es repetido cíclicamente, generando un tren de oscilaciones de $Ca^{2+}$ que produce una secuencia repetitiva de cambios de dirección en el espermatozoide \citeauthor{Guerrero:2010gw}, \citep{Guerrero:2010gw}, \citeauthor{Guerrero:2010gd} \citep{Guerrero:2010gd}, \citeauthor{Bohmer:2005ik} \citep{Bohmer:2005ik}, \citeauthor{Wood:2005gg} \citep{Wood:2005gg}, \citeauthor{Wood2007} \citep{Wood2007}. En un experimento típico, como el mostrado en la figura \ref{fig:fluorescencia}, la vía se mantiene activa un promedio de 10 segundos \citeauthor{Wood:2003p4517} \citep{Wood:2003p4517}.
 
-\section{Antecedentes de modelos discretos}
+\section{Modelos discretos de vías de señalización}
 
 Propuestos originalmente por Stuart Kauffman \citeauthor{Kauffman:1969up} \citep{Kauffman:1969up}, los modelos de red Boolena (o más generalmente, modelos discretos) son discretos en tiempo y estado, donde cada componente de una vía de señalización  bioquímica o red regulatoria genética se considera como un nodo. La red está formada por estos nodos y un conjunto de aristas, que representan el tipo de interacción existente entre cada par de nodos. Estas interacciones pueden ser de activación o de inhibición. 
 
@@ -54,23 +55,22 @@ Uno de los aspectos fundamentales de este tipo de modelos discretos es que cualq
 Este tipo de modelos han sido utilizados para modelar redes de regulación genética dando una descripción cualitativa del sistema, como se muestra en \citeauthor{EspinosaSoto:2004jr} \citep{EspinosaSoto:2004jr}, \citeauthor{Albert:2003vx} \citep{Albert:2003vx}. Además, recientemente se han usado para modelar vías de señalización \citeauthor{Morris:2010gb} \citep{Morris:2010gb}.
 
 
-\citeauthor{huang2005} \citep{huang2005} muestran que los atractores din\'amicos corresponden a patrones estables de expresi\'on gen\'etica que determinan estados funcionales estables de una c\'elula. En el caso del modelo de la red de se\~nalizaci\'on que se estudia en este trabajo, los atractores de la red determinan las oscilaciones estables de calcio que posibilitan la relocalizaci\'on de los espermatozoides a trav\'es de las alteraciones que el calcio induce a la curvatura del flagelo.
-
-\subsection{Modelo discreto de tres nodos}\label{sect:3nodos}
+\citeauthor{huang2005} \citep{huang2005} muestran que los atractores din\'amicos de un modelo discreto de red de regulación genética, corresponden a patrones estables de expresi\'on gen\'etica que determinan estados funcionales estables de una c\'elula. 
+%\subsection{Modelo discreto de tres nodos}\label{sect:3nodos}
 
 %% ESTA SUBSECCIóN REQUIERE UN MAJOR REWRITING :S
 
-Con el objetivo de explorar y ganar entendimiento acerca de cómo transformar modelos discretos en modelos de Glass, se utilizó una red Booleana de tres nodos que había sido estudiada previamente por \citeauthor{Reka3Nodos2010}. En ese trabajo se caracteriza por completo el comportamiento de dicha red discreta. Este modelo discreto es mostrado en la figura \ref{fig:red3reka}.
+%Con el objetivo de explorar y ganar entendimiento acerca de cómo transformar modelos discretos en modelos de Glass, se utilizó una red Booleana de tres nodos que había sido estudiada previamente por \citeauthor{Reka3Nodos2010} \citep{Reka3Nodos2010}. En ese trabajo se caracteriza por completo el comportamiento de dicha red discreta. Este modelo discreto es mostrado en la figura \ref{fig:red3reka}.
 
-\begin{figure}[hbt]
-\includegraphics[width=0.9\linewidth]{gfx/red3nodos}
-\caption[Modelo Booleano de 3 nodos]{Modelo Booleano de 3 nodos de \citeauthor{Reka3Nodos2010} \citep{Reka3Nodos2010}.\ a) Reglas L\'ogicas.\ b) Estados posibles de la red.}\label{fig:red3reka}
-\end{figure}
+%\begin{figure}[hbt]
+%\includegraphics[width=0.9\linewidth]{gfx/red3nodos}
+%\caption[Modelo Booleano de 3 nodos]{Modelo Booleano de 3 nodos de \citeauthor{Reka3Nodos2010} \citep{Reka3Nodos2010}.\ a) Reglas L\'ogicas.\ b) Estados posibles de la red.}\label{fig:red3reka}
+%\end{figure}
 
 
-Si bien este modelo no está relacionado con la red de señalización discutida en esta tesis, el hecho de contar con pocos nodos sirvió como un buen punto de partida para transformar un modelo Booleano en uno de ecuaciones de Glass.
+%Si bien este modelo no está relacionado con la red de señalización discutida en esta tesis, el hecho de contar con pocos nodos sirvió como un buen punto de partida para transformar un modelo Booleano en uno de ecuaciones de Glass.
 
-\subsection{Modelo discreto de la vía de señalización inducida por speract}\label{sect:erizo}
+\section{Modelo discreto de la vía de señalización inducida por speract}\label{sect:erizo}
 
 
 \citeauthor{Espinal2011} \citep{Espinal2011} presentan un modelo discreto en tiempo y estado para la vía de señalización inducida por speract en el flagelo del esperma de erizo de mar. En ese trabajo, dieciocho de los veintidos nodos toman valores de estado $0$ ó $1$, mientras que los cuatro nodos restantes tienen un valor de estado ternario, es decir, cada uno de estos nodos puede encontrarse en el estado $0$, $1$ ó $2$. Esta extensión a tres valores posibles es necesaria para capturar los estados posibles en los que se puede encontrar un componente de la red, véase la figura \ref{fig:erizoModelo}.
@@ -88,15 +88,13 @@ Si bien este modelo no está relacionado con la red de señalización discutida 
 El applet fue desarrollado por el Dr. Maximino Aldana y se encuentra disponible en \url{http://www.fis.unam.mx/research/seaurchin/discrete/}. Este applet permite explorar de manera interactiva distintas condiciones iniciales, cambiar las reglas lógicas así como observar el comportamiento de la red en ausencia de algunos nodos.}\label{fig:appletErizo}
 \end{figure}
 
-En el trabajo citado, se determina que este modelo llega a dos configuraciones cíclicas o atractores, uno de período cuatro y otro de período ocho. Estos atractores se relacionaron con las mediciones experimentales de fluorescencia de calcio en el flagelo del espermatozoide. El 80\% de las configuraciones iniciales posibles convergen al atractor de período cuatro. El período cuatro de este atractor corresponde a una oscilación del tren de oscilaciones que se observa en las mediciones experimentales como la de la figura \ref{fig:fluorescencia} \citeauthor{Espinal2011} \citep{Espinal2011}.
+En el trabajo citado, se determina que este modelo llega a dos configuraciones cíclicas o atractores, uno de período cuatro y otro de período ocho. Estos atractores se relacionaron con las mediciones experimentales de fluorescencia de calcio en el flagelo del espermatozoide. Bajo el criterio de \citeauthor{huang2005} \citep{huang2005} mencionado en la sección anterior, los atractores del modelo discreto de la red de señalización de speract determinan las oscilaciones estables de calcio que posibilitan la relocalizaci\'on de los espermatozoides a trav\'es de las alteraciones que el calcio induce a la curvatura del flagelo. El 80\% de las configuraciones iniciales posibles convergen al atractor de período cuatro. El período cuatro de este atractor corresponde a una oscilación del tren de oscilaciones que se observa en las mediciones experimentales como la de la figura \ref{fig:fluorescencia} \citeauthor{Espinal2011} \citep{Espinal2011}.
 
 Un paso fundamental al proponer un modelo para un sistema biológico consiste en comparar los resultados de dicho modelo con comportamientos que se hayan observado previamente mediante técnicas experimentales. A este proceso se le conoce como validación del modelo. El modelo presentado en \citeauthor{Espinal2011} \citep{Espinal2011} corrobora en un nivel cualitativo comportamientos observados experimentalmente, por ejemplo:
 \begin{itemize}
-\item En ausencia de speract, todas las condiciones iniciales alcanzan las condiciones basales tras un pequeño transitorio. De esta manera se confirma el papel que juega el speract para disparar las oscilaciones de $[Ca^{2+}]_i$.
+\item En ausencia de speract, todas las condiciones iniciales alcanzan las condiciones basales tras un pequeño transitorio. De esta manera se confirma el papel que juega el speract para disparar las oscilaciones de $[Ca^{2+}]_i$ \citeauthor{Espinal2011} \citep{Espinal2011}.
 \item Si el nodo correspondiente a la permeabilidad de potasio $(dK)$ se elimina, las oscilaciones de $[Ca^{2+}]_i$ se suprimen. Este comportamiento se ha observado experimentalmente en \citeauthor{Babcock:1992uf} \citep{Babcock:1992uf}.
 \end{itemize}
-
-Una de las ventajas de construir modelos dinámicos de vías de señalización es facilitar la simulación de una gran cantidad de condiciones experimentales, con la intención de realizar predicciones que sugieran experimentos nuevos.
 
 \begin{figure}[hbt]
 \includegraphics[width=0.9\linewidth]{gfx/figura8Chucho}
@@ -107,9 +105,98 @@ El modelo de la vía de señalización de speract predijo dos comportamientos qu
 
 Como se puede observar en el apartado B de la figura \ref{fig:verapamil}, el tiempo medio para la aparición de la primera oscilación de calcio tras la adición de speract al medio es de alrededor de $500 ms$ en presencia de verapamil, en contraste con los $~350 ms$ del tipo silvestre. 
 
+\section{Alcances y limitaciones del modelo discreto}
 
 %% Este párrafo quedaría mejor en la justificación del modelo semicontinuo.
-Por lo tanto, el modelo discreto divide una oscilación de calcio en cuatro subintervalos discretos en el tiempo. El valor discreto de un nodo cualquiera de la red en un  subintervalo de tiempo, puede interpretarse como el promedio de los valores continuos que tomó ese nodo en el subintervalo: si dicho valor promedio fue mayor que un umbral, el estado discreto en todo el subintervalo es 1, y 0 en caso contrario. Lo que se quiere poner de manifiesto con esta observación es que las comparaciones entre un modelo discreto y las mediciones experimentales son a un nivel cualitativo y con una resolución temporal lo suficientemente grande como para contener en un paso de tiempo discreto varios cambios de estado continuo. Un modelo discreto es capaz de decir cómo cambia un sistema en una escala de tiempo más grande que aquella en la que suceden los eventos microscópicos del sistema. De ahí la necesidad de contar con otro tipo de descripciones del sistema que permitan hacer comparaciones entre modelo y experimentos en escalas de tiempo más pequeñas. Además, es deseable que dichas descripciones permitan hacer una comparación más precisa entre los valores de las variables de estado y las mediciones experimentales, por ejemplo, donde las variables de estado del modelo sean continuas.
+La figura \ref{fig:appletErizo} muestra que el modelo discreto divide una oscilación de calcio en cuatro subintervalos discretos en el tiempo. El valor discreto de un nodo cualquiera de la red en un subintervalo de tiempo, puede interpretarse como el promedio de los valores continuos que tomó ese nodo en el subintervalo: si dicho valor promedio fue mayor que un umbral, el estado discreto en todo el subintervalo es 1, y 0 en caso contrario. Lo que se quiere poner de manifiesto con esta observación es que las comparaciones entre un modelo discreto y las mediciones experimentales son a un nivel cualitativo y con una resolución temporal lo suficientemente grande como para contener en un paso de tiempo discreto varios cambios de estado continuo. Un modelo discreto es capaz de decir cómo cambia un sistema en una escala de tiempo más grande que aquella en la que suceden los eventos microscópicos del sistema. De ahí la necesidad de contar con otro tipo de descripciones del sistema que permitan hacer comparaciones entre modelo y experimentos en escalas de tiempo más pequeñas. Además, es deseable que dichas descripciones permitan hacer una comparación más precisa entre los valores de las variables de estado y las mediciones experimentales, por ejemplo, donde las variables de estado del modelo sean continuas.
 
-%%(Insertar figura que explique esto).
-%%Discusión aquí de algunos de los resultados del modelo discreto.
+Una de las limitaciones de dicho modelo consiste en que el sistema es sincronizado, es decir, todos los nodos actualizan su estado con el mismo esquema temporal. Esta actualización sincronizada es particularmente válida en tanto que el estado del nodo es un promedio en un intervalo de tiempo cuya duración es mayor que el tiempo en el que se dan las reacciones bioquímicas de la red. Sin embargo, aunque válido, el describir al sistema en intervalos de actualización largos es también una desventaja, puesto que solo es posible realizar comparaciones con experimentos a nivel cualitativo dadas las diferencias de escala temporal entre experimento y modelo. Finalmente, la discretización de las variables de estado es adecuada para tener una idea general --no particular-- de la dinámica del sistema. 
+
+\section{Ecuaciones de Glass}
+
+Una opción de modelación intermedia entre los modelos discretos y los basados en las EDOs son los de dinámica semicontinua. Entre este tipo de modelos se encuentran las ecuaciones lineales por pedazos que fueron esbozadas por Glass en \citeauthor{Glass1973} \citep{Glass1973}, consistentes en definir una derivada cuya forma específica depende del valor de un mapeo discreto en un intervalo de tiempo pequeño. 
+
+\subsection{Construcción de las ecuaciones de Glass}
+
+Consideremos de nuevo el mapeo discreto \ref{eqn:kaufman}. Es posible escribirlo también como
+
+\begin{equation}
+\sigma_i(t+\tau_i)=F_i[\sigma_{i_1}(t),\sigma_{i_2}(t),\ldots,\sigma_{i_k}(t)]
+\end{equation}
+\\
+donde $\tau_i=1$. Si $\tau_i \rightarrow 0$, haciendo un desarrollo en serie de Taylor de $\sigma_i(t+\tau_i)$ hasta la derivada de primer orden, para posteriormente despejar esa derivada se obtiene
+
+\begin{equation}
+\frac{d\sigma_i(t)}{dt} = \frac{1}{\tau_i} [\sigma_i(t+\tau_i) - \sigma_i(t)]
+\end{equation}
+\\
+y sustituyendo $\sigma_i(t+\tau_i)$ por 
+
+\begin{equation}
+F_i[H(\sigma_{i_1}(t), \theta_{i_1}), H(\sigma_{i_2}(t), \theta_{i_2}),\ldots, H(\sigma_{i_k}(t), \theta_{i_k})]
+\end{equation}
+\\
+obtenemos 
+
+\begin{equation}
+\frac{d\sigma_i(t)}{dt} = \frac{1}{\tau_i} (F_i[H(\sigma_{i_1}(t), \theta_{i_1}), H(\sigma_{i_2}(t), \theta_{i_2}),\ldots, H(\sigma_{i_k}(t), \theta_{i_k})] - \sigma_i(t))
+\end{equation} 
+\\
+donde $\frac{1}{\tau_i}$ es el inverso del tamaño del intervalo donde se hace el desarrollo en serie de Taylor y $H(\sigma_{i_1}, \theta_{i_1})$ es una función escalón que discretiza los valores de estado del nodo $i_1$ usando un valor de umbral $\theta_{i_1}$. Esta discretización es necesaria puesto que la variable de estado es ahora una variable continua, al igual que el tiempo. Todos los $F_i$ son los mapeos del modelo discreto a partir del cual se construyeron las ecuaciones de Glass.
+
+Mediante este procedimiento, es posible contar con una descripción semicontinua de la dinámica del sistema, en tanto que la derivada de cada nodo no es única sino que depende del valor de la función discreta en cada intervalo de tamaño $\tau_i$. A este tipo de ecuaciones se les conoce también como \emph{Piecewise Linear Differential Equations}, o Ecuaciones Diferenciales Lineales por Pedazos.
+%% (Conviene tener una gráfica que ilustre por qué esto es realmente un mapeo piecewise linear, o de manera equivalente mostrar formalmente una de las ecuaciones diferenciales como un mapeo)
+
+\subsection{Ventajas y desventajas}
+
+El beneficio directo de usar el formalismo de las ecuaciones de Glass es contar con un refinamiento de las descripciones temporal y de estado que es capaz de producir un modelo discreto. Además, como se acaba de mostrar en su planteamiento, por construcción las ecuaciones de Glass incluyen un modelo discreto que a su vez fue planteado a partir de observaciones y conocimiento biológico. De este modo, estas ecuaciones semicontinuas no son un formalismo \emph{ad hoc} que reproduce el comportamiento de un sistema a través de ajustar arbitrariamente trayectorias, sino que se basan en un conjunto de observaciones y conocimiento previo.
+
+El costo por usar este formalismo radica en la estimación de los valores de umbral para cada nodo de la red. En el caso de que se quiera un modelo sincronizado, los tiempos característicos, que denotamos como $\alpha_i=\frac{1}{\tau_i}$ pueden establecerse todos iguales. En particular, el modelo discreto en tiempo se recupera al establecer el tiempo característico en $\tau_i = 1,\ \forall i$.
+
+En este sentido, el problema de construir un modelo semicontinuo usando ecuaciones de Glass se reduce a un problema de estimación de parámetros. Estos parámetros son los umbrales de activación de cada nodo, además de los inversos del tamaño de cada uno de los intervalos de tiempo. Los parámetros deben elegirse de modo que la dinámica del sistema y de los nodos en particular sea coherente desde un punto de vista biológico.
+
+\section{Estimación de parámetros}
+
+La estimación de parámetros es un problema de optimización, consistente en encontrar parámetros tales que un modelo que dependa de ellos, minimice el error entre la solución al modelo y mediciones experimentales, es decir, que se \emph{ajuste} o \emph{explique} un conjunto de datos experimentales.
+
+Para resolver un problema de optimización, es necesario definir una función, conocida como función objetivo, función de adaptación o función de costo, que permita asignar un valor a cada solución factible. Dependiendo de la manera en que esté definida, puede buscarse minimizar o maximizar la función objetivo. Los problemas de maximización y minimización son equivalentes, ya que minimizar una función $f$ es lo mismo que maximizar $h=-f$. Además de plantear una función para minimizar o maximizar, resulta útil contar con una estrategia de exploración del espacio de soluciones. 
+
+De manera formal, sea $f(\mathbf{p})$ la función de costo a minimizar (o función de adaptación a maximizar), donde $f:\mathbb{R}^n\rightarrow \mathbb{R}$ y $\mathbf{p}$ es un vector de números reales. El valor de la función $f(\mathbf{p})$ indica la adaptación o costo del vector $\mathbf{p}$. Típicamente, en muchos problemas el gradiente de $f$ es desconocido. El objetivo consiste en encontrar un $m \in \mathbb{R}^n$ tal que $f(m) \le f(p),\ \forall \mathbf{p} \in \mathbb{R}^n$. En el caso de maximización, basta con definir la función $h=-f$. En este trabajo se optó por la minimización de funciones objetivo.
+
+\subsection{Funciones objetivo}
+
+Para el tipo de problemas de optimización discutidos en esta tesis, las funciones objetivo que se planteen, deben de permitir establecer una noción de distancia para determinar el grado de similitud entre una serie temporal proveniente de datos experimentales, y una serie temporal de la solución a un problema de condiciones iniciales de la ecuación de Glass correspondiente a dicha medición experimental.
+
+Existen varias maneras de comparar series de tiempo, desde técnicas generales y ampliamente usadas como el \emph{Error Cuadrático Medio} \textsc{(mse)} \citep{msewiki}, el \emph{Coeficiente de Correlación de Pearson} \citep{pearsoncorrwiki}, hasta aquéllas que fueron diseñadas con el objetivo de establecer la similitud entre series de tiempo surgidas de procesos biológicos, como el \emph{Índice de Pendiente o Slope Index} \textsc{(si)} \citeauthor{Cho2006} \citep{Cho2006}.% Además se pueden usar algunos otros criterios que califiquen la similitud de dos trayectorias basados no solo en la distancia sino en propiedades específicas de un conjunto de parámetros que influyen sobre esa dinámica. En este último grupo se encuentra la \emph{Regularización Promotora de Dispersión o Sparsity Promoting Regularization} \citeauthor{Engl2009}.%(Van der Boos, Engels 2009, Vogel).
+
+\subsection{Estrategias de exploración}
+
+Una vez que se tiene definida una función objetivo o función de costo que permita evaluar las distintas soluciones factibles al problema, es necesario contar con una estrategia de búsqueda o exploración que permita explorar el espacio de soluciones factibles. Además, es deseable que la estrategia de búsqueda explore de manera inteligente el espacio de soluciones, es decir, que evite que la búsqueda quede atrapada en puntos extremos locales y que por ende sea imposible encontrar los puntos extremos globales.
+
+\subsubsection{Tipos de exploración}
+
+Además de la búsqueda al azar, existen dos estrategias generales para resolver problemas de optimización: aquéllas basadas en la diferenciabilidad de la función de costo, y aquéllas basadas en el uso de criterios heurísticos.
+Un ejemplo clásico de un método basado en diferenciabilidad es el de Gradiente Conjugado, \citeauthor{numrecipesc} \citep{numrecipesc}. Entre los métodos populares basados en criterios heurísticos se encuentran el \textsc{Recocido Simulado}, \citeauthor{Kirkpatrick1983} \citep{Kirkpatrick1983}, y los \textsc{Algoritmos Genéticos}, \citeauthor{Goldberg1989} \citep{Goldberg1989}.
+
+Las métodos basados en diferenciabilidad suelen usarse cuando se conoce con un buen nivel de detalle el espacio de soluciones, y en ese caso permiten encontrar los puntos extremos globales fácilmente. Sin embargo, una mala elección del punto inicial de búsqueda puede resultar en que estos algoritmos de optimización queden atrapados en un punto extremo local. Hacer malas elecciones del punto inicial de búsqueda suele ser común cuando no se conoce muy a fondo el espacio de soluciones. Por ello, estos métodos son útiles para refinar soluciones, es decir, para aumentar la precisión de una solución una vez que se cree que se está cerca de un punto extremo global, o al menos, cerca de un punto cuyo valor es cercano al punto extremo global.
+
+Por otro lado, los métodos de búsqueda basados en criterios heurísticos explotan propiedades del problema que no necesariamente están relacionadas con la diferenciabilidad de la función objetivo o función de costo. Además, se ha observado que son más resistentes a quedar atrapados en puntos extremos locales, debido a que incluyen un subprocedimiento que permite variar de una u otra forma las soluciones propuestas, independientemente de si esta solución mejora o no el costo de la función objetivo. Por lo tanto, estos métodos no son tan sensibles a una mala elección del punto o puntos iniciales de búsqueda, y no es necesario conocer la forma específica del espacio de soluciones, \citeauthor{BangaMoles2003} \citep{BangaMoles2003}, \citeauthor{Storn1997} \citep{Storn1997}.
+
+\section{Justificación y objetivo}
+
+Tal y como se mostró en el experimento de bloqueo de $HVA$, el tipo de comparaciones que se pueden hacer entre el modelo discreto y los experimentos son a un nivel cualitativo. A pesar de que aún a este nivel es posible ganar entendimiento de la vía de señalización, el contar con un modelo más detallado en tiempo y estado sería útil para hacer comparaciones a nivel cuantitativo.
+Adicionalmente, hay que considerar que al hacer más pequeño el tiempo en el que se actualiza el estado de un componente de la red, la asincronía, es decir, que cada componente o nodo de la red actualice su estado de acuerdo a su propio tiempo característico de reacción, se vuelve más relevante, \citeauthor{Reka3Nodos2010} \citep{Reka3Nodos2010}.
+
+Una opción para refinar el modelo es plantear ecuaciones diferenciales ordinarias. Sin embargo, para esto se requiere conocer un conjunto de parámetros relacionados directamente con magnitudes físicas y bioquímicas, a saber: las concentraciones de cada componente de la vía de señalización; las tasas de asociación y disociación de cada complejo bioquímico, y finalmente, la cooperatividad de las reacciones bioquímicas, es decir, la cantidad de moléculas necesarias de un compuesto para que este reaccione con otro. Por lo general, estos parámetros no son conocidos en su totalidad y su estimación experimental es costosa, complicada desde el punto de vista de diseño y ejecución del experimento, o ambas. En el caso particular de esta red de señalización, no todos estos parámetros e información son conocidos, por lo que como primera aproximación se desarrolló el modelo discreto antes mencionado.
+
+Un modelo basado en las ecuaciones de Glass es un tipo de descripción del sistema a un nivel de detalle que se encuentra entre una aproximación discreta y una continua como la proporcionada por un modelo basado en ecuaciones diferenciales ordinarias.
+
+Es importante recalcar que las ecuaciones de Glass no son en modo alguno una alternativa excluyente del modelado que se pueda hacer con ecuaciones diferenciales ordinarias. Por el contrario, si bien es cierto que los parámetros temporales y de umbral de las ecuaciones de Glass no son los mismos parámetros cinéticos y de reacción que aparecen en los modelos basados en EDOs, conocer los parámetros de las ecuaciones de Glass puede dar una idea cualitativa de la magnitud de los parámetros cinéticos. Este conocimiento cualitativo resultaría de gran utilidad al momento de querer plantear un sistema de ecuaciones diferenciales acopladas para la vía de señalización de speract.
+
+El objetivo de este trabajo es mejorar, mediante el uso de ecuaciones de Glass, la descripción temporal y de estado de la vía de señalización que la proporcionada por el modelo discreto de \citeauthor{Espinal2011} \citep{Espinal2011}. 
+
+Algunas de las funciones de regulación del modelo de \citeauthor{Espinal2011} \citep{Espinal2011}, en particular las correspondientes a los nodos de calcio y potencial de membrana, son bastante más complejas que las presentadas en otros modelos, por ejemplo en $ELENA-LOS-DE-LAS-FLORES$, $ELENA-EUGENIO-RAIZ$. En estos dos últimos modelos, todos los nodos y por ende las funciones de regulación son estrictamente binarios, en contraste con los valores ternarios de los nodos de calcio y potencial de membrana y algunos de los reguladores de éstos en el modelo de \citeauthor{Espinal2011}. Por ello, se determinó que sería conveniente ganar entendimiento del proceso de traducción de un modelo discreto en uno basado en ecuaciones de Glass, ayudándose de un modelo discreto con una dinámica más sencilla. En particular, dentro de  \citeauthor{Reka3Nodos2010} \citep{Reka3Nodos2010} se presenta una red discreta pequeña de tres nodos, donde los valores de estado son estrictamente Booleanos. La elección de esta red se basa solo en su simplicidad, a la par de que no es una red artificial. Los  modelos de $ELENA-LOS-DE-LAS-FLORES$, $ELENA-EUGENIO-RAIZ$ son bastante más complejos que esa red de tres nodos. La red de tres nodos se describe brevemente en el apéndice NÚMERO POR DETERMINAR.
+
+%Dado que las mediciones experimentales arrojan datos continuos tomados con una frecuencia bastante mayor que la descripción del modelo discreto, la comparación entre dicho modelo y las mediciones experimentales se puede hacer hasta un nivel de detalle limitado. Sería deseable contar con un modelo que pudiera dar una descripción continua en tiempo y estado, además de incorporar asincronía, es decir, que cada componente o nodo de la red actualice su estado de acuerdo a su propio tiempo característico de reacción. Para este fin bien podría plantearse un modelo basado en \textsc{EDOs}. Sin embargo, para hacerlo sería necesario conocer un conjunto de parámetros relacionados directamente con magnitudes físicas y bioquímicas, a saber: las concentraciones de cada componente de la vía de señalización; las tasas de asociación y disociación de cada complejo bioquímico, y finalmente, la cooperatividad de las reacciones bioquímicas, es decir, la cantidad de moléculas necesarias de un compuesto para que este reaccione con otro. Sin embargo, por lo general estos parámetros no son conocidos en su totalidad y su estimación experimental es costosa, complicada desde el punto de vista de diseño y ejecución del experimento, o ambas. Si bien se puede hacer la estimación de algunos de estos parámetros a través de modelos computacionales y de optimización, se requiere de cierto conocimiento previo del sistema para poder llevar a cabo la estimación de manera más dirigida y reducir el espacio de búsqueda.
+
+%En el caso particular de esta red de señalización, no todos estos parámetros e información son conocidos, por lo que como primera aproximacion se desarrolló el modelo discreto antes mencionado. Un modelo basado en las ecuaciones de Glass constituye un refinamiento a la descripción del sistema proporcionada por el modelo discreto.
