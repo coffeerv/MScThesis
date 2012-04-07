@@ -79,13 +79,18 @@
 \PassOptionsToPackage{utf8}{inputenc}	% latin9 (ISO-8859-9) = latin1+"Euro sign"
  \usepackage{inputenc}				
 
+
+\PassOptionsToPackage{square,numbers}{natbib}
+ \usepackage{natbib}	
+ 
 %\PassOptionsToPackage{ngerman,american}{babel}   % change this to your language(s)
 % Spanish languages need extra options in order to work with this template
 \PassOptionsToPackage{spanish,es-lcroman,mexico}{babel}
  \usepackage{babel}					
 
-\PassOptionsToPackage{square,numbers}{natbib}
- \usepackage{natbib}				
+%% Added by me =P
+%\PassOptionsToPackage{fixlanguage}{babelbib}
+% \usepackage{babelbib}
 
 \PassOptionsToPackage{fleqn}{amsmath}		% math environments and more by the AMS 
  \usepackage{amsmath}
@@ -123,10 +128,10 @@
 % ****************************************************************************************************
 \usepackage{listings} 
 %\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
-\lstset{language=[LaTeX]Tex,%C++,
+\lstset{language=[ANSI]C,%[LaTeX]Tex,%C++,
     keywordstyle=\color{RoyalBlue},%\bfseries,
     basicstyle=\small\ttfamily,
-    %identifierstyle=\color{NavyBlue},
+    identifierstyle=\color{Maroon},
     commentstyle=\color{Green}\ttfamily,
     stringstyle=\rmfamily,
     numbers=none,%left,%

@@ -11,28 +11,6 @@ En el caso de la vía de señalización, objeto de estudio de esta tesis, los pa
 
 Es necesario establecer una noción de distancia para determinar si la serie temporal proveniente de los experimentos de fluorescencia de calcio corresponde con la trayectoria del nodo de calcio del modelo de ecuaciones semicontinuas.
 
-\subsubsection{Error Cuadrático Medio (MSE)}
-
-
-El \textsc{mse} \citep{msewiki} es el cuadrado del valor esperado de la diferencia entre las observaciones y la respuesta, trayectoria o dinámica predicha por un modelo. Al ser minimizado, es posible discriminar entre distintos modelos, estableciendo cuál de entre un conjunto de modelos ajusta mejor, es decir, explica mejor los datos. El \textsc{mse} está dado por $$E[(\hat{\theta} - \theta)^2]$$
-
-\subsubsection{Coeficiente de correlación de Pearson}
-
-El Coeficiente de Correlación de Pearson \citep{pearsoncorrwiki} es una medida de la correlación (dependencia lineal) entre dos variables aleatorias $X$ y $Y$, denotado por $r \in [-1, 1]$, está dado por
-\begin{equation} 
-r = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})} {\sqrt{\sum_{i=1}^n (X_i - \bar{X})^2} \sqrt{\sum_{i=1}^n (Y_i - \bar{Y})^2}}
-\end{equation}
-\\
-donde $\bar{X}$ y $\bar{Y}$ son los promedios de $X$ y $Y$, respectivamente, y $X_i$ y $Y_i$ denotan la $i$ésima medición experimental de $X$ y $Y$, respectivamente.
-
-\subsubsection{Índice de Pendiente (SI)}
-
-Propuesto por \citeauthor{Cho2006} \citep{Cho2006}, el índice de pendiente entre dos series de tiempo $X$ y $Y$ consiste en ponderar la suma de los signos de las derivadas entre los puntos de ambas series. Está dado por 
-\begin{equation}
-SI(X,Y) = \frac{1}{k - 1} \sum_{i=1}^{k-1} \mathrm{signo} \left(\frac{X_{i+1} - X_i} {Y_{i+1} - Y_i}\right)
-\end{equation}
-De manera similar al coeficiente de correlación de Pearson, $SI(X,Y)\in [-1, 1]$. 
-
 %
 %\subsubsection{Sparsity Promoting Regularization}
 %
@@ -85,5 +63,14 @@ Sea $x \in \mathbb{R}^n$ un agente en la población de tamaño $NP>3$; sea $F \i
 
 La elección de $F$, $CR$ y $NP$ puede tener un impacto significativo en el desempeño de la optimización. \citeauthor{Storn1997}  \citep{Storn1997}, y \citeauthor{lampinen2002} \citep{lampinen2002} proporcionan valores iniciales para estos parámetros que parecen ser un buen punto de partida en general.
 
+\section{Búsqueda de parámetros}
+
+La búsqueda de parámetros para los modelos de ecuaciones de Glass se realizó usando diferentes combinaciones de funciones objetivo y estrategias de búsqueda. La implementación de las rutinas se realizó en lenguaje C \citeauthor{Kernighan1988} \citep{Kernighan1988} bajo el estándar \textsc{iso c99} publicado por  \citeauthor{c99} \citep{c99} usando el compilador \textsc{clang} de \citeauthor{clang} \citep{clang}. Adicionalmente, se usaron los módulos de estadística, métodos de solución de ecuaciones diferenciales ordinarias, vectores y matrices, y generación de números aleatorios de la biblioteca de funciones para cómputo científico \textsc{GNU Scientific Library (GSL) v.1.15} \citeauthor{gslManual} \citep{gslManual}.
+
+Para la solución de ecuaciones diferenciales se utilizó el método de Euler \citeauthor{numrecipesc} \citep{numrecipesc}. También se utilizaron el método de Runge-Kutta 4,5 \citeauthor{numrecipesc} \citep{numrecipesc}, \citeauthor{gslManual} \citep{gslManual}; y el método de paso adaptativo de Adams-Bashforth \citep{gslManual}. Estos dos últimos métodos son menos sensibles a errores que el método de Euler original.
+
+El método de Euler se implementó directamente, mientras que para el caso del método de Runge-Kutta 4,5 y del método de Adams-Bashforth se utilizó la implementación de la \textsc{GNU Scientific Library (GSL) v.1.15}. La generación de números aleatorios se realizó usando la implementación de la \textsc{GNU Scientific Library (GSL) v.1.15} del algoritmo \textsc{ranlxs2} \citeauthor{gslManual} \citep{gslManual}.
+
+Como esquema general, los programas de inferencia de parámetros consistían en proponer soluciones candidato y evaluarlas, repitiendo el proceso hasta cumplir con un criterio de paro. Una solución candidato consiste en un conjunto de parámetros propuestos de acuerdo a una estrategia de exploración del espacio de búsqueda y las trayectorias solución del problema de condiciones iniciales del sistema de ecuaciones de Glass correspondiente a dichos parámetros. La evaluación de candidatos consistió en comparar la señal original o medición experimental con la dinámica de Glass del nodo correspondiente a dicha señal o medición experimental.
 
 

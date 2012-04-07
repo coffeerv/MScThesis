@@ -1,15 +1,6 @@
 %************************************************
 \chapter{Resultados}\label{ch:resultados}
 %************************************************
-\section{Búsqueda de parámetros}
-
-La búsqueda de parámetros para los modelos de ecuaciones de Glass se realizó usando diferentes combinaciones de funciones objetivo y estrategias de búsqueda. La implementación de las rutinas se realizó en lenguaje C \citep{Kernighan1988} bajo el estándar \textsc{iso c99} publicado por \citet{c99} usando el compilador \textsc{clang} \citep{clang}. Adicionalmente, se usaron los módulos de estadística, métodos de solución de ecuaciones diferenciales ordinarias, vectores y matrices, y generación de números aleatorios de la biblioteca de funciones para cómputo científico \textsc{GNU Scientific Library (GSL) v.1.15} \citep{gslManual}.
-
-Para la solución de ecuaciones diferenciales se utilizó el método de Euler \citeauthor{numrecipesc} \citep{numrecipesc}. También se utilizaron el método de Runge-Kutta 4,5 \citeauthor{numrecipesc} \citep{numrecipesc}, \citep{gslManual}; y el método de paso adaptativo de Adams-Bashforth \citep{gslManual}. Estos dos últimos métodos son menos sensibles a errores que el método de Euler original.
-
-El método de Euler se implementó directamente, mientras que para el caso del método de Runge-Kutta 4,5 y del método de Adams-Bashforth se utilizó la implementación de la \textsc{GNU Scientific Library (GSL) v.1.15}. La generación de números aleatorios se realizó usando la implementación de la \textsc{GNU Scientific Library (GSL) v.1.15} del algoritmo \textsc{ranlxs2}.
-
-Como esquema general, los programas de inferencia de parámetros consistían en proponer soluciones candidato y evaluarlas, repitiendo el proceso hasta cumplir con un criterio de paro. Una solución candidato consiste en un conjunto de parámetros propuestos de acuerdo a una estrategia de exploración del espacio de búsqueda y las trayectorias solución del problema de condiciones iniciales del sistema de ecuaciones de Glass correspondiente a dichos parámetros. La evaluación de candidatos consistió en comparar la señal original o medición experimental con la dinámica de Glass del nodo correspondiente a dicha señal o medición experimental.
 
 \subsection{Modelo de tres nodos}
 
