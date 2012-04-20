@@ -2,8 +2,7 @@
 \chapter{Introducci\'on}\label{ch:antecedentes}
 %*****************************************
 
-%En este capítulo se discute brevemente el fenómeno biológico que se quiere entender a través de modelación computacional. Posteriormente se discuten un modelo de red Booleana de tres nodos que se usó para ganar entendimiento de cómo transformar un modelo discreto en uno semicontinuo, así como del modelo de la vía de señalización basado en funciones discretas. Este último modelo es un antecedente directo del semicontinuo desarrollado en este trabajo.
-Aquí debe de aparecer el nuevo resumen del capítulo. Está pendiente de agregarse debido a la reestructuración de la tesis solicitada por José Díaz.
+Este capítulo inicia presentando una vía de señalización relacionada con la motilidad del espermatozoide de erizo de mar. Posteriormente presenta un modelo discreto para dicha vía de señalización, señalando sus alcances y limitaciones. Seguidamente se muestra un formalismo semicontinuo que promete llevar las comparaciones entre modelo y experimento a un nivel más cuantitativo, así como algunos detalles relevantes para la transformación de un modelo discreto en el formalismo semicontinuo antes mencionado.
 
 \section{La v\'ia de se\~nalizaci\'on de speract}\label{sec:spSigNet}
 
@@ -93,7 +92,7 @@ Este tipo de modelos han sido utilizados para modelar redes de regulación gené
 \begin{figure}[hbt]
 \includegraphics[width=0.9\linewidth%,height=10cm
 ]{gfx/appletErizo}
-\caption[Applet del Modelo Discreto]{Applet del Modelo Discreto de la red de se\~nalizaci\'on \citeauthor{Espinal2011} \citep{Espinal2011}.\ Serie temporal de los patrones de activación de la red de señalización. Los nodos binarios se presentan en negro y verde, correpondientes a \emph{apagado} y \emph{encendido}. Los nodos ternarios correspondientes a los canales \ac{hva} y \ac{lva}, el negro es un estado inactivo, el amarillo corresponde a un canal cerrado y el rojo a un canal abierto. El nodo correspondiente al \acf{v} es negro para un potencial en reposo, azul para la hiperpolarización y rojo para la repolarización. El nodo correspondiente al \ac{calintra} es amarillo para indicar el incremento tónico, rojo para el incremento supratónico y negro para indicar estado basal. Se muestra el comportamiento del especímen silvestre (wt).
+\caption[Applet del Modelo Discreto]{Applet del Modelo Discreto de la red de se\~nalizaci\'on \citeauthor{Espinal2011} \citep{Espinal2011}.\ Serie temporal de los patrones de activación de la red de señalización. Los nodos binarios se presentan en negro y verde, correspondientes a \emph{apagado}($0$) y \emph{encendido} ($1$). Los nodos ternarios correspondientes a los canales \ac{hva} y \ac{lva}, el negro es un estado inactivo ($0$), el amarillo ($1$) corresponde a un canal cerrado y el rojo ($2$) a un canal abierto. El nodo correspondiente al \acf{v} es negro ($0$) para un potencial en reposo, azul para la hiperpolarización ($1$) y rojo ($2$) para la repolarización. El nodo correspondiente al \ac{calintra} es amarillo ($1$) para indicar el incremento tónico, rojo ($2$) para el incremento supratónico y negro ($0$) para indicar estado basal. Se muestra el comportamiento del espécimen silvestre o \emph{wild type}.
 El applet fue desarrollado por el Dr. Maximino Aldana y se encuentra disponible en \url{http://www.fis.unam.mx/research/seaurchin/discrete/}.}\label{fig:appletErizo}
 \end{figure}
 
@@ -167,7 +166,11 @@ donde $\frac{1}{\tau_i}$ es el inverso del tamaño del intervalo donde se hace e
 Mediante este procedimiento, es posible contar con una descripción semicontinua de la dinámica del sistema. La derivada de cada nodo no es única sino que depende del valor de la función discreta en cada intervalo de tamaño $\tau_i$. La derivada para un nodo Booleano es de la forma
 
 \begin{equation}
-\frac{d\sigma_i(t)}{dt} = \left\{    \begin{array}{rr}      \frac{1}{\tau_i} (1 - \sigma_i(t)) & \text{si } F_i[\hat{\sigma}_{i_1}, \hat{\sigma}_{i_2}, \ldots, \hat{\sigma}_{i_k}] = 1\\      \frac{1}{\tau_i} (0 - \sigma_i(t)) & \text{si } F_i[\hat{\sigma}_{i_1}, \hat{\sigma}_{i_2}, \ldots, \hat{\sigma}_{i_k}] = 0    \end{array} \right.
+\frac{d\sigma_i(t)}{dt} = \left\{
+    \begin{array}{rr}
+      \frac{1}{\tau_i} (1 - \sigma_i(t)) & \text{si } F_i[\hat{\sigma}_{i_1}, \hat{\sigma}_{i_2}, \ldots, \hat{\sigma}_{i_k}] = 1\\
+      \frac{1}{\tau_i} (0 - \sigma_i(t)) & \text{si } F_i[\hat{\sigma}_{i_1}, \hat{\sigma}_{i_2}, \ldots, \hat{\sigma}_{i_k}] = 0
+    \end{array} \right.
 \end{equation} 
 \\
 
@@ -190,38 +193,57 @@ Para resolver un problema de optimización, es necesario definir una función, c
 
 De manera formal, sea $f(\mathbf{p})$ la función de costo a minimizar (o función de adaptación a maximizar), donde $f:\mathbb{R}^n\rightarrow \mathbb{R}$ y $\mathbf{p}$ es un vector de números reales. El valor de la función $f(\mathbf{p})$ indica la adaptación o costo del vector $\mathbf{p}$. Típicamente, en muchos problemas el gradiente de $f$ es desconocido. El objetivo consiste en encontrar $\mathbf{m} \in \mathbb{R}^n$ tal que $f(\mathbf{m}) \le f(\mathbf{p}),\ \forall \mathbf{p} \in \mathbb{R}^n$. En el caso de maximización, basta con definir la función $h=-f$. En este trabajo se optó por la minimización de funciones objetivo.
 
-\subsection{Funciones de comparación}
+\subsection{Funciones de comparación}\label{ch1FuncComp}
 
 Para el tipo de problemas de optimización discutidos en esta tesis, las funciones objetivo que se planteen, deben de permitir establecer una noción de distancia para determinar el grado de similitud entre una serie temporal proveniente de datos experimentales, y una serie temporal de la solución a un problema de condiciones iniciales de la ecuación de Glass correspondiente a dicha medición experimental.
 
 Existen varias maneras de comparar series de tiempo, desde técnicas generales y ampliamente usadas como el \emph{Error Cuadrático Medio} \textsc{(mse)} \citep{msewiki}, el \emph{Coeficiente de Correlación de Pearson} \citep{pearsoncorrwiki}, hasta aquéllas que fueron diseñadas con el objetivo de establecer la similitud entre series de tiempo surgidas de procesos biológicos, como el \emph{Índice de Pendiente o Slope Index} \textsc{(si)} \citeauthor{Cho2006} \citep{Cho2006}.% Además se pueden usar algunos otros criterios que califiquen la similitud de dos trayectorias basados no solo en la distancia sino en propiedades específicas de un conjunto de parámetros que influyen sobre esa dinámica. En este último grupo se encuentra la \emph{Regularización Promotora de Dispersión o Sparsity Promoting Regularization} \citeauthor{Engl2009}.%(Van der Boos, Engels 2009, Vogel).
 
-\subsubsection{Error Cuadrático Medio (MSE)}
+\subsubsection{Error Cuadrático Medio (MSE)}\label{MSE}
 
-El \textsc{mse} \citep{msewiki} es el cuadrado del valor esperado de la diferencia entre las observaciones y la respuesta, trayectoria o dinámica predicha por un modelo. Al ser minimizado, es posible discriminar entre distintos modelos, estableciendo cuál de entre un conjunto de modelos ajusta mejor, es decir, explica mejor los datos. El \textsc{mse} está dado por $$E[(\hat{\theta} - \theta)^2]$$
+El \textsc{mse} \citep{msewiki} es el cuadrado del valor esperado de la diferencia entre las observaciones y la respuesta, trayectoria o dinámica predicha por un modelo. Al ser minimizado, es posible discriminar entre distintos modelos, estableciendo cuál de entre un conjunto de modelos ajusta mejor, es decir, explica mejor los datos. El \textsc{mse} está dado por 
+\begin{equation}
+E[(Y - X)^2]
+\end{equation}
+\\
+donde $X$ son los datos experimentales, $Y$ son los datos del modelo que se quiere ajustar a dichos datos y $E$ es el valor esperado de la diferencia entre los conjuntos de datos $X$ y $Y$, es decir
 
-\subsubsection{Coeficiente de correlación de Pearson}
+\begin{equation}
+	E = \frac{1}{n} (Y_i - X_i)^2
+\end{equation}
+\\
+donde $X_i$ y $Y_i$ denotan las $i$ésimas mediciones de $X$ y $Y$, respectivamente y $n$ es el número de datos.
+
+
+
+\subsubsection{Coeficiente de correlación de Pearson}\label{pearson}
 
 El Coeficiente de Correlación de Pearson \citep{pearsoncorrwiki} es una medida de la correlación (dependencia lineal) entre dos variables aleatorias $X$ y $Y$, denotado por $r \in [-1, 1]$, está dado por
-\begin{equation} 
-r = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})} {\sqrt{\sum_{i=1}^n (X_i - \bar{X})^2} \sqrt{\sum_{i=1}^n (Y_i - \bar{Y})^2}}
+\begin{equation}\label{pearsonEQ} 
+r_{\mathbf{X},\mathbf{Y}} = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})} {\sqrt{\sum_{i=1}^n (X_i - \bar{X})^2} \sqrt{\sum_{i=1}^n (Y_i - \bar{Y})^2}}
 \end{equation}
 \\
-donde $\bar{X}$ y $\bar{Y}$ son los promedios de $X$ y $Y$, respectivamente, y $X_i$ y $Y_i$ denotan la $i$ésima medición experimental de $X$ y $Y$, respectivamente.
+donde $\bar{X}$ y $\bar{Y}$ son los promedios de $X$ y $Y$, respectivamente, $X_i$ y $Y_i$ denotan las $i$ésimas mediciones de $X$ y $Y$, respectivamente y $n$ es el número de datos. En este trabajo se identifica a los datos experimentales como $X$ y a $Y$ como los datos provenientes de la solución de un modelo (es decir, el modelo que se desea hacer coincidir con esos datos experimentales).
 
-\subsubsection{Índice de Pendiente (SI)}
+\subsubsection{Índice de Pendiente (SI)}\label{slopeIndex}
 
 Propuesto por \citeauthor{Cho2006} \citep{Cho2006}, el índice de pendiente entre dos series de tiempo $X$ y $Y$ consiste en ponderar la suma de los signos de las derivadas entre los puntos de ambas series. Está dado por 
-\begin{equation}
-SI(X,Y) = \frac{1}{k - 1} \sum_{i=1}^{k-1} \mathtt{signo} \left(\frac{X_{i+1} - X_i} {Y_{i+1} - Y_i}\right)
+
+\begin{equation}\label{siEQ}
+SI(X,Y) = \frac{1}{n - 1} \sum_{i=1}^{n-1} \mathtt{signo} \left(\frac{X_{i+1} - X_i} {Y_{i+1} - Y_i}\right)
 \end{equation}
 \\
-donde $X_i$ y $Y_i$ denotan la $i$ésima medición experimental de $X$ y $Y$, respectivamente, $k$ es el total de mediciones experimentales y signo es una función  definida como $\mathtt{signo}: \mathbb{R} \rightarrow \{ -1,0,1 \} $ dada por
-\begin{equation*}  \mathtt{signo}(a) = \left\{    \begin{array}{rl}      -1 & \text{si } a < 0,\\      0 & \text{si } a = 0,\\      1 & \text{si } a > 0.    \end{array} \right.\end{equation*}
+donde $X_i$ y $Y_i$ denotan las $i$ésimas mediciones experimental de $X$ y $Y$, respectivamente, $n$ es el total de mediciones experimentales y signo es una función  definida como $\mathtt{signo}: \mathbb{R} \rightarrow \{ -1,0,1 \} $ dada por
+\begin{equation*}
+  \mathtt{signo}(a) = \left\{
+    \begin{array}{rl}
+      -1 & \text{si } a < 0,\\
+      0 & \text{si } a = 0,\\
+      1 & \text{si } a > 0.
+    \end{array} \right.
+\end{equation*}
 \\
-Se excluyen aquellos puntos en los cuales $Y_{i+1} - Y_i = 0$. De manera similar al coeficiente de correlación de Pearson, $SI(X,Y)\in [-1, 1]$. 
-
-
+Se excluyen aquellos puntos en los cuales $Y_{i+1} - Y_i = 0$. De manera similar al coeficiente de correlación de Pearson, $SI(X,Y)\in [-1, 1]$, $X$ representa a los datos experimentales y $Y$ los datos provenientes de la solución de un modelo (es decir, el modelo que se desea hacer coincidir con esos datos experimentales).
 
 \subsection{Estrategias de exploración}
 
@@ -249,7 +271,12 @@ Es importante recalcar que las ecuaciones de Glass no son en modo alguno una alt
 
 El objetivo de este trabajo es mejorar, mediante el uso de ecuaciones de Glass, la descripción temporal y de estado de la vía de señalización que la proporcionada por el modelo discreto de \citeauthor{Espinal2011} \citep{Espinal2011}. 
 
-Algunas de las funciones de regulación del modelo de \citeauthor{Espinal2011} \citep{Espinal2011}, en particular las correspondientes a los nodos de \ac{ca} y potencial de membrana, son bastante más complejas que las que aparecen en otros modelos discretos, por ejemplo el de diferenciación de la flor de la planta modelo  \emph{Arabidopsis thaliana} que presentan \citeauthor{EspinosaSoto:2004jr} \citep{EspinosaSoto:2004jr}, o el de diferenciación en el nicho de células madre de la misma planta desarrollado en \citeauthor{Azpeitia:2010ik} \citep{Azpeitia:2010ik}. En estos dos últimos modelos, todos los nodos y por ende las funciones de regulación son estrictamente binarios, en contraste con los valores ternarios de los nodos de \ac{ca} y potencial de membrana y algunos de los reguladores de éstos en el modelo de \citeauthor{Espinal2011}. Por ello, se determinó que sería conveniente ganar entendimiento del proceso de traducción de un modelo discreto en uno basado en ecuaciones de Glass, ayudándose de un modelo discreto con una dinámica más sencilla. En particular, dentro de  \citeauthor{Reka3Nodos2010} \citep{Reka3Nodos2010} se presenta una red discreta pequeña de tres nodos, donde los valores de estado son estrictamente Booleanos. La elección de esta red se basa solo en su simplicidad, a la par de que no es una red artificial. Los  modelos de \citeauthor{EspinosaSoto:2004jr} \citep{EspinosaSoto:2004jr}, \citeauthor{Azpeitia:2010ik} \citep{Azpeitia:2010ik} son bastante más complejos que esa red de tres nodos. La red de tres nodos se describe brevemente en el apéndice NÚMERO POR DETERMINAR.
+Algunas de las funciones de regulación del modelo de \citeauthor{Espinal2011} \citep{Espinal2011}, en particular las correspondientes a los nodos de \ac{ca} y potencial de membrana, son bastante más complejas que las que aparecen en otros modelos discretos, por ejemplo el de diferenciación de la flor de la planta modelo  \emph{Arabidopsis thaliana} que presentan \citeauthor{EspinosaSoto:2004jr} \citep{EspinosaSoto:2004jr} y \citeauthor{AlvarezBuylla:2008cg} \citep{AlvarezBuylla:2008cg}, o el de diferenciación en el nicho de células madre de la misma planta desarrollado en \citeauthor{Azpeitia:2010ik} \citep{Azpeitia:2010ik}. En estos modelos, todos los nodos y por ende las funciones de regulación son estrictamente binarios, en contraste con los valores ternarios de los nodos de \ac{ca} y potencial de membrana y algunos de los reguladores de éstos en el modelo de \citeauthor{Espinal2011}. Por ello, se determinó que sería conveniente ganar entendimiento del proceso de traducción de un modelo discreto en uno basado en ecuaciones de Glass, ayudándose de un modelo discreto con una dinámica más sencilla. En particular, dentro de  \citeauthor{Reka3Nodos2010} \citep{Reka3Nodos2010} se presenta una red discreta pequeña de tres nodos, donde los valores de estado son estrictamente Booleanos. La elección de esta red se basa solo en su simplicidad, a la par de que no es una red artificial sino una subred de una vía de señalización en plantas. Los modelos que se presentan en \citeauthor{EspinosaSoto:2004jr} \citep{EspinosaSoto:2004jr}, \citeauthor{AlvarezBuylla:2008cg} \citep{AlvarezBuylla:2008cg} y \citeauthor{Azpeitia:2010ik} \citep{Azpeitia:2010ik} son bastante más complejos que esa red de tres nodos. La red de tres nodos se describe brevemente en el apéndice \ref{ch:3Nodos}.
+
+\section{Resumen}
+Este capítulo introdujo la vía de señalización de speract, que se ha relacionado con la motilidad del espermatozoide de erizo de mar. Mostró también un modelo discreto para esta vía de señalización, resaltando sus alcances y limitaciones. Introdujo el formalismo semicontinuo de las ecuaciones de Glass y mostró algunos aspectos relevantes para la construcción de un modelo de este tipo a partir de uno discreto. Además, se mencionó que el objetivo de esta tesis es desarrollar un modelo de ecuaciones de Glass para la vía de señalización de speract, y que para ganar entendimiento de este proceso, se desarrolló también un modelo semicontinuo para una red simple de tres nodos.
+
+El siguiente capítulo aborda detalles necesarios para la construcción de los programas de ajuste de parámetros para ambos modelos de ecuaciones de Glass.
 
 %Dado que las mediciones experimentales arrojan datos continuos tomados con una frecuencia bastante mayor que la descripción del modelo discreto, la comparación entre dicho modelo y las mediciones experimentales se puede hacer hasta un nivel de detalle limitado. Sería deseable contar con un modelo que pudiera dar una descripción continua en tiempo y estado, además de incorporar asincronía, es decir, que cada componente o nodo de la red actualice su estado de acuerdo a su propio tiempo característico de reacción. Para este fin bien podría plantearse un modelo basado en \textsc{EDOs}. Sin embargo, para hacerlo sería necesario conocer un conjunto de parámetros relacionados directamente con magnitudes físicas y bioquímicas, a saber: las concentraciones de cada componente de la vía de señalización; las tasas de asociación y disociación de cada complejo bioquímico, y finalmente, la cooperatividad de las reacciones bioquímicas, es decir, la cantidad de moléculas necesarias de un compuesto para que este reaccione con otro. Sin embargo, por lo general estos parámetros no son conocidos en su totalidad y su estimación experimental es costosa, complicada desde el punto de vista de diseño y ejecución del experimento, o ambas. Si bien se puede hacer la estimación de algunos de estos parámetros a través de modelos computacionales y de optimización, se requiere de cierto conocimiento previo del sistema para poder llevar a cabo la estimación de manera más dirigida y reducir el espacio de búsqueda.
 

@@ -1,5 +1,5 @@
 %************************************************
-\chapter{Discusión, Conclusiones y Perspectivas}\label{ch:conclusiones}
+\chapter{Conclusiones y Perspectivas}\label{ch:conclusiones}
 %************************************************
 
 % While it has not been possible to provide definite answers to the questions (Unsuccessful experiment, but I still hope to get it published)
@@ -10,32 +10,17 @@
 % It is clear that much additional work will be required before a complete understanding of this phenomenon occurs
 % It is hoped that this study will stimulate further investigations in this field
 
-Este capítulo discute los resultados del trabajo que fueron expuestos en el capítulo anterior. Posteriormente presenta algunas conclusiones, y al final menciona ideas que podrían ser de utilidad para extender y refinar la investigación iniciada en este trabajo. 
-
-\section{Discusión}
-En cuanto al modelo Booleano de tres nodos, es interesante resaltar que la relación \emph{parámetros a estimar}/\emph{tipos de mediciones} es alta ($1/3$). Contar con un tipo de medición para un sistema de 3 componentes parece permitir la estimación de parámetros, aún con una estrategia de exploración bastante pobre como la búsqueda aleatoria.
-
-El hecho de que la búsqueda aleatoria se haya comportado mejor que los algoritmos genéticos bien podría deberse a que algunos de los parámetros sugeridos para el algoritmo genérico resultaran inadecuados.%En particular el parámetro de mutación = 0.2 es anormalmente alto.
-
-Con lo que respecta al modelo de la vía de señalización de speract, la relación \emph{parámetros a estimar}/\emph{tipos de mediciones} es, al contrario del modelo de 3 nodos, muy baja ($1/26$). Realizar ajustes de parámetros en este caso es más complicado si no se cuenta con más tipos de mediciones.
-
-Estos resultados pueden deberse a que las funciones objetivo imponen restricciones sobre el comportamiento del nodo de $Ca^{2+}$, si bien no logran calificar adecuadamente la dinámica de otros nodos y por lo tanto restringirlos a tener un comportamiento fisiológicamente válido. En este sentido, de acuerdo a la metodología presentada es posible encontrar modelos con un comportamiento matemáticamente correcto pero cuya interpretación biológica no es necesariamente válida. 
-
-Es necesario contar entonces con una metodología que incorpore más tipos de mediciones experimentales para tiempos largos, use funciones objetivo que califiquen el comportamiento de varios nodos y que imponga restricciones a priori a las soluciones posibles. 
-
-En este trabajo no se incorporaron otros tipos de mediciones experimentales para tiempos largos por carecer de ellas. Algunos avances en las técnicas experimentales necesarias para realizar otras mediciones podrían en un futuro arrojar datos que sea posible incluir en el diseño de otras funciones objetivo.
-
-La imposición a priori de restricciones a las soluciones posibles pueden generalmente es un evento brusco dentro del proceso de búsqueda que no siempre es favorable, ya que puede resultar en la no exploración de ciertas zonas del espacio de búsqueda por efecto de que los agentes sean repelidos de la región donde opera la restricción y por azar sean llevados a otras regiones distintas. La consecuencia directa es el aumento del tiempo de búsqueda.
-
+Este capítulo presenta algunas conclusiones, y al final menciona ideas que podrían ser de utilidad para extender y refinar la investigación iniciada en este trabajo. 
 
 \section{Conclusiones}
 
-\paragraph {La transformación de modelos discretos en semicontinuos (ecuaciones de Glass) basada en estimación de parámetros es posible}Se mostró que es posible la transformación de modelos discretos en semicontinuos mediante un ejemplo consistente en una pequeña red Booleana sincronizada compuesta por tres nodos. En este caso solo fue necesario estimar tres parámetros y se contó con un solo tipo de medición ``experimental'' o señal original contra la cual comparar. Para este tipo de problema, la elección de estrategia de búsqueda no tiene mayor consecuencia, ya que es posible obtener resultados satisfactorios aún con la búsqueda aleatoria. El índice de pendiente \textsc{(si)} mostró ser una buena medida de comparación entre señales.  
+%\paragraph {La transformación de modelos discretos en semicontinuos (ecuaciones de Glass) basada en estimación de parámetros es posible}Se mostró que es posible la transformación de modelos discretos en semicontinuos mediante un ejemplo consistente en una pequeña red Booleana sincronizada compuesta por tres nodos. En este caso solo fue necesario estimar tres parámetros y se contó con un solo tipo de medición ``experimental'' o señal original contra la cual comparar. Para este tipo de problema, la elección de estrategia de búsqueda no tiene mayor consecuencia, ya que es posible obtener resultados satisfactorios aún con la búsqueda aleatoria. El índice de pendiente \textsc{(si)} mostró ser una buena medida de comparación entre señales.  
 
 \paragraph {La transformación de un modelo discreto en semicontinuo produce buenos resultados en sistemas donde la relación \emph{parámetros a estimar}/\emph{tipos de mediciones} es alta}El modelo Booleano de 3 nodos muestra que el paso de un formalismo de modelación a otro puede ser exitoso cuando se cuenta con datos suficientes contra los cuales comparar el modelo, en relación a la cantidad de parámetros a estimar. Por el contrario, en modelos como el de la vía señalización, en los que la cantidad de parámetros es mucho mayor que los criterios contra los cuales comparar, es difícil encontrar resultados biológicamente relevantes.
 
-\paragraph {Son necesarias metodologías de estimación de parámetros más robustas} Si bien este trabajo no presenta una respuesta definitiva en términos de mostrar una metodología generalizada para la transformación de modelos discretos en semicontinuos, %es cierto que ha aportado evidencia de que estos últimos resultan un buen punto intermedio entre los discretos y los puramente continuos.Además, 
-pone de manifiesto la necesidad e importancia de contar con metodologías de estimación de parámetros más robustas, que puedan ser aplicadas a problemas donde se requiere encontrar una gran cantidad de parámetros a partir de pocas mediciones experimentales.
+\paragraph {La elección de parámetros para modelos de Glass no es simple} A pesar del éxito que han tenido algunos modelos (\citeauthor{AlvarezBuylla:2008cg} \citep{AlvarezBuylla:2008cg}, \citeauthor{Azpeitia:2010ik} \citep{Azpeitia:2010ik}) en reproducir el comportamiento observado experimentalmente, este trabajo muestra que no siempre es directo encontrar un conjunto de parámetros tales que la dinámica del modelo tenga una interpretación biológica correcta. Establecer los inversos de tiempo característicos en un valor de $1$ y los umbrales de cada nodo en $0.5$ parece ser una buena primera elección ante falta de información detallada, pero no necesariamente es correcta en todos los casos.
+
+\paragraph {Es necesaria una metodología general para la transformación de modelos discretos en modelos de ecuaciones de Glass} La metodología empleada en este trabajo no presenta una forma generalizada para la transformación de modelos discretos en semicontinuos basados en ecuaciones de Glass. Este tipo de modelos resultan atractivos puesto que constituyen un paso intermedio entre los modelos discretos, que requieren poca información, y los basados en ecuaciones diferenciales, que requieren más información detallada. Contar con una metodología generalizada permitiría construir de manera semiautomática una representación más detallada del sistema que la de un modelo discreto, a partir de apenas un poco más de información que la usada para construir a este último pero sin llegar al nivel de detalle requerido por un modelo de ecuaciones diferenciales ordinarias.
 
 \section{Perspectivas y trabajo futuro}
 

@@ -1,15 +1,29 @@
 %************************************************
-\chapter{Materiales y M\'etodos}\label{ch:matmet} % $\mathbb{ZNR}$
+\chapter{Materiales y M\'etodos}\label{ch:matmet}
 %************************************************
-%Este capítulo comienza con una discusión de los alcances y limitaciones del modelo discreto a manera de motivación y justificación para el desarrollo de este trabajo. Posteriormente introduce el formalismo de ecuaciones de Glass; plantea el problema de la estimación de parámetros como un problema de optimización, describiendo las nociones de distancia usadas para comparar la dinámica de calcio de Glass con mediciones experimentales; finalmente aborda brevemente el procedimiento seguido para poner en marcha la búsqueda de parámetros.
 
-\section{Scratchpad}
-En el caso de la vía de señalización, objeto de estudio de esta tesis, los parámetros a encontrar fueron aquellos tales que reprodujeran el comportamiento del calcio intracelular observado experimentalmente. Se tomó en consideración solamente la similitud en la dinámica de calcio del sistema debido a que éste es el único tipo de dato experimental que cuenta con mediciones largas. Un ejemplo de estas mediciones se muestra en la figura \ref{fig:fluorescencia}.
+Este capítulo describe los materiales y métodos empleados para el ajuste de parámetros de los modelos de ecuaciones de Glass de la vía de señalización de speract presentada en el capítulo anterior y la red de tres nodos del apéndice \ref{ch:3Nodos}. Define los datos experimentales que se usaron para la comparación, las funciones objetivo y estrategias de búsqueda, así como mencionar detalles de la implementación computacional de los programas.
 
+\section{Datos experimentales}
+Los datos experimentales que se usaron en todas las comparaciones para discriminar modelos de ecuaciones de Glass corresponden a mediciones de fluorescencia de \ac{ca} obtenidos en el laboratorio del Dr. Alberto Darszon. Un ejemplo de estas mediciones se muestra en la figura \ref{fig:fluorescencia}. Como se mencionó en la sección \ref{sec:spSigNet} del capítulo \ref{ch:antecedentes}, los detalles experimentales de la obtención de estas mediciones se describen a profundidad en \citeauthor{Darszon2008} \citep{Darszon2008} y \citeauthor{Wood2007} \citep{Wood2007}. 
 
-\subsection{Funciones objetivo}
+Es importante recalcar que la fluorescencia de calcio es el único tipo de dato experimental que cuenta con mediciones largas (del órden de 10 segundos, aproximadamente).
 
-Es necesario establecer una noción de distancia para determinar si la serie temporal proveniente de los experimentos de fluorescencia de calcio corresponde con la trayectoria del nodo de calcio del modelo de ecuaciones semicontinuas.
+\section{Funciones objetivo}\label{ch2funcObj}
+
+Como se mencionó en \ref{ch1FuncComp}, es necesario establecer una noción de distancia para determinar qué tan bueno es el ajuste a las mediciones experimentales de un modelo de ecuaciones de Glass con un conjunto de parámetros determinado. Para este efecto, anteriormente se mencionó que los criterios que pueden ayudar a esta determinación son el Error Cuadrático Medio \ref{MSE}, el Índice de Correlación de Pearson \ref{pearson} y el Índice de Pendiente \ref{slopeIndex}.
+
+Se definieron funciones de costo para los anteriores criterios. En cada función, $\mathbf{X}$ representa a las mediciones experimentales, $\mathbf{Y}$ representa a los datos del modelo de ecuaciones de Glass. Finalmente, $X_i$ y $Y_i$ representan a cada uno de los puntos de la medición y de la solución de las ecuaciones de Glass, respectivamente. Cabe recalcar que las únicas mediciones experimentales con las que se cuenta son las de fluorescencia de \ac{ca}, y por lo tanto, los datos del modelo que se compararon con esas mediciones fueron los correspondientes a la dinámica del nodo de \ac{calintra}.
+
+Las funciones son
+
+\begin{eqnarray}
+f_{MSE}(\mathbf{X},\mathbf{Y}) & = & \frac{1}{n} (Y_i - X_i)^2\\
+f_{Pearson}(\mathbf{X},\mathbf{Y}) & = & 1 - r_{\mathbf{X},\mathbf{Y}}\\
+f_{SI}(\mathbf{X},\mathbf{Y}) & = & 1 - \mathrm{SI}(X,Y)
+\end{eqnarray}
+\\
+donde $r_{\mathbf{X},\mathbf{Y}}$ es el Coeficiente de Correlación de Pearson, definido en \ref{pearsonEQ}, SI es el Índice de Pendiente, definido en \ref{siEQ}. De la definición de el Coeficiente de Correlación de Pearson y del Índice de Pendiente, se puede ver que $1 - r_{\mathbf{X},\mathbf{Y}} = 2$, si $r_{\mathbf{X},\mathbf{Y}} = -1$, es decir, cuando $\mathbf{X}$ y $\mathbf{Y}$ están correlacionados negativamente, mientras que $1 - r_{\mathbf{X},\mathbf{Y}} = 0$, si $r_{\mathbf{X},\mathbf{Y}} = 1$, es decir, cuando la correlación entre los datos experimentales y el modelo es perfecta. Entonces, minimizar $f_{Pearson}(\mathbf{X},\mathbf{Y})$ permite elegir un modelo que produzca los datos $Y$ tal que la similitud con los experimentos sea mayor. Un argumento similar muestra que minimizar $f_{SI}(\mathbf{X},\mathbf{Y})$ permite seleccionar un modelo que produzca datos $Y$ con una similitud mayor a los datos experimentales.
 
 %
 %\subsubsection{Sparsity Promoting Regularization}
@@ -23,6 +37,8 @@ Es necesario establecer una noción de distancia para determinar si la serie tem
 %J(\mathbf{p}) = \| \Psi(\Phi(\mathbf{p},t)) - X\|_2^2 -\beta \| \mathbf{p} \| _1^1
 %\end{equation}
 %donde $\beta \in (0,1)$ es un término promotor de la regularización, que se utiliza para ponderar mediante la norma a 1 el desempeño del vector de parámetros $\mathbf{p}$, mientras que $X$ representa los datos contra los cuales se compara el modelo. 
+
+\section{Estrategias de Búsqueda}
 
 En este trabajo, las estrategias de exploración utilizadas fueron \textsc{Búsqueda Aleatoria}, \textsc{Algoritmos Genéticos} y \textsc{Evolución Diferencial}, cada uno de los cuales se describe a continuación.
 
@@ -38,7 +54,7 @@ El agoritmo inicia con un conjunto de agentes denominados población, donde cada
 
 Tradicionalmente el genoma y los operadores de los algoritmos genéticos son discretos. Dado que los parámetros que se requirió estimar en este trabajo toman valores continuos, se usó una variante de los algoritmos genéticos tradicionales, adaptados a trabajar con variables continuas encontrado en \citeauthor{Haupt1998} \citep{Haupt1998}, en donde el genoma de un agente se codifica como un vector de valores continuos y los operadores de cruza y mutación pueden ser aplicados a este tipo de variables.
 
-\subsubsection{Evolución Diferencial}
+\subsubsection{Evolución Diferencial}\label{difEvol}
 
 \citeauthor{Storn1997} \citep{Storn1997} observaron que algunos métodos heurísticos existentes no eran tan robustos y no convergían tan rápidamente al ser aplicados a problemas de optimización que involucraran variables continuas. A raíz de esto, desarrollaron un método específicamente pensado para este tipo de problemas. 
 
@@ -71,6 +87,7 @@ Para la solución de ecuaciones diferenciales se utilizó el método de Euler \c
 
 El método de Euler se implementó directamente, mientras que para el caso del método de Runge-Kutta 4,5 y del método de Adams-Bashforth se utilizó la implementación de la \textsc{GNU Scientific Library (GSL) v.1.15}. La generación de números aleatorios se realizó usando la implementación de la \textsc{GNU Scientific Library (GSL) v.1.15} del algoritmo \textsc{ranlxs2} \citeauthor{gslManual} \citep{gslManual}.
 
-Como esquema general, los programas de inferencia de parámetros consistían en proponer soluciones candidato y evaluarlas, repitiendo el proceso hasta cumplir con un criterio de paro. Una solución candidato consiste en un conjunto de parámetros propuestos de acuerdo a una estrategia de exploración del espacio de búsqueda y las trayectorias solución del problema de condiciones iniciales del sistema de ecuaciones de Glass correspondiente a dichos parámetros. La evaluación de candidatos consistió en comparar la señal original o medición experimental con la dinámica de Glass del nodo correspondiente a dicha señal o medición experimental.
+Como esquema general, los programas de inferencia de parámetros consistían en proponer soluciones candidato y evaluarlas, repitiendo el proceso hasta cumplir con un criterio de paro. Una solución candidato consiste en un conjunto de parámetros propuestos de acuerdo a una estrategia de exploración del espacio de búsqueda y las trayectorias solución del problema de condiciones iniciales del sistema de ecuaciones de Glass correspondiente a dichos parámetros. La evaluación de soluciones candidato consistió en calcular su costo de acuerdo a las funciones objetivo de la sección \ref{ch2funcObj}, para las cuales $X$ son las mediciones experimentales de fluorescencia de calcio y $Y$ la dinámica del nodo de \ac{calintra} del modelo de Glass dado por un conjunto de parámetros particulares.
 
-
+\section{Resumen}
+En este capítulo se definieron las herramientas necesarias para implementar los programas de búsqueda de parámetros de los modelos de ecuaciones de Glass de la vía de señalización de speract presentada en el capítulo anterior y la red de tres nodos del apéndice \ref{ch:3Nodos}. El siguiente capítulo muestra y discute los resultados de la ejecución de las estrategias de búsqueda.
