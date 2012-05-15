@@ -1,6 +1,6 @@
 # Ignore whatever file is not a TeX/LaTeX, BIBTeX or image file.
 # Include the pdf output though, for the purpose of usefulness
-
+.DS_Store
 *.aux
 
 *.bak
