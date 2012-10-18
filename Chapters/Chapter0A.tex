@@ -19,36 +19,42 @@ La red de tres nodos consta de $CIS$, $Ca^{2+}_c$ y $Ca^{2+}ATPase$. Como se men
 Las reglas lógicas para la red de $CIS$, $Ca^{2+}_c$ y $Ca^{2+}ATPase$ son
 
 \begin{eqnarray}
-   	CIS(t+1) & = & Ca^{2+}_c(t) \\     Ca^{2+}_c(t+1) & = & CIS(t) \wedge \neg Ca^{2+}ATPase(t) \\     Ca^{2+}ATPase(t+1) & = & Ca^{2+}_c(t)\end{eqnarray}
+   	CIS(t+1) & = & Ca^{2+}_c(t) \\ 
+    Ca^{2+}_c(t+1) & = & CIS(t) \wedge \neg Ca^{2+}ATPase(t) \\ 
+    Ca^{2+}ATPase(t+1) & = & Ca^{2+}_c(t)
+\end{eqnarray}
 
+Los símbolos $\land$, $\lor$ y $\neg$ representan las funciones lógicas Y (AND), O (OR) y Negación (NOT), respectivamente.
 
 Por simplicidad, y debido a que el interés de trabajar con esta red es usar un modelo pequeño independientemente de las interpretaciones que se puedan hacer de la vía de señalización del ácido abscísico, denotemos a $CIS$, $Ca^{2+}_c$ y $Ca^{2+}ATPase$ como $\sigma_x$, $\sigma_y$ y $\sigma_z$, respectivamente. Las reglas lógicas quedan entonces como
 
 \begin{eqnarray}
-	\sigma_x(t+1) & = & \sigma_y(t) \\     \sigma_y(t+1) & = & \sigma_x(t) \wedge \neg \sigma_z(t) \\     \sigma_z(t+1) & = & \sigma_y(t)
+	\sigma_x(t+1) & = & \sigma_y(t) \\ 
+    \sigma_y(t+1) & = & \sigma_x(t) \wedge \neg \sigma_z(t) \\ 
+    \sigma_z(t+1) & = & \sigma_y(t)
 \end{eqnarray}
 
 El modelo de ecuaciones de Glass para la red de tres nodos queda dado por
 
 \begin{eqnarray}\label{glass1_3nodos}
-\frac{d\sigma_x}{dt} & = & \alpha_{\sigma_x} [F_{\sigma_x}(\widehat{\sigma_y}) - \sigma_x]
+\frac{d\sigma_x}{dt} & = & \alpha_{\sigma_x} [F_{\sigma_x}(\widehat{\sigma_y(t)}) - \sigma_x(t)]
 \end{eqnarray}
 \begin{eqnarray}\label{glass2_3nodos}
-\frac{d\sigma_y}{dt} & = & \alpha_{\sigma_y} [F_{\sigma_y}(\widehat{\sigma_x}, \widehat{\sigma_z}) - \sigma_y]
+\frac{d\sigma_y}{dt} & = & \alpha_{\sigma_y} [F_{\sigma_y}(\widehat{\sigma_x(t)}, \widehat{\sigma_z(t)}) - \sigma_y(t)]
 \end{eqnarray}
 \begin{eqnarray}\label{glass3_3nodos}
-\frac{d\sigma_z}{dt} & = & \alpha_{\sigma_z} [F_{\sigma_z}(\widehat{\sigma_y}) - \sigma_z)]
+\frac{d\sigma_z}{dt} & = & \alpha_{\sigma_z} [F_{\sigma_z}(\widehat{\sigma_y(t)}) - \sigma_z(t)]
 \end{eqnarray}
 \\
 donde
 
 \begin{eqnarray}
-	\widehat{\sigma_x} = H(\sigma_x - \theta_{\sigma_x}) \\
-	\widehat{\sigma_y} = H(\sigma_y - \theta_{\sigma_y}) \\
-	\widehat{\sigma_z} = H(\sigma_z - \theta_{\sigma_z})
+	\widehat{\sigma_x}(t) = H(\sigma_x(t) - \theta_{\sigma_x}) \\
+	\widehat{\sigma_y}(t) = H(\sigma_y(t) - \theta_{\sigma_y}) \\
+	\widehat{\sigma_z}(t) = H(\sigma_z(t) - \theta_{\sigma_z})
 \end{eqnarray}
 \\
-corresponden a los valores discretizados de las variables continuas $\sigma_x$, $\sigma_y$ y $\sigma_z$, respectivamente, $H$ es la función de Heavyside y los $\theta_{\sigma_i}$ son valores de umbral. Es necesario discretizar el valor de estas variables pues hay que recordar que $F_{\sigma_x}$, $F_{\sigma_y}$ y $F_{\sigma_z}$ son funciones cuyos argumentos son valores discretos.
+corresponden a los valores discretizados de las variables continuas $\sigma_x$, $\sigma_y$ y $\sigma_z$ al tiempo $t$, respectivamente, $H$ es la función de Heavyside y los $\theta_{\sigma_i}$ son valores de umbral. Es necesario discretizar el valor de estas variables pues hay que recordar que $F_{\sigma_x}$, $F_{\sigma_y}$ y $F_{\sigma_z}$ son funciones cuyos argumentos son valores discretos.
 
 
 

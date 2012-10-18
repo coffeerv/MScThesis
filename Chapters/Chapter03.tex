@@ -14,14 +14,14 @@ Como caso de ejemplo de estimación de parámetros en un problema de transformac
 \caption[Dinámica original $\sigma_z$]{Solución del problema de condiciones iniciales $\sigma_x = 1$, $\sigma_y = 0$, $\sigma_z = 0$ de las ecuaciones \ref{glass1_3nodos}, \ref{glass2_3nodos} y \ref{glass3_3nodos}, correspondientes al modelo de Glass de la red de 3 nodos del apéndice \ref{ch:3Nodos}, con parámetros $\alpha_{\sigma_x} = \alpha_{\sigma_y} = \alpha_{\sigma_z} = 1$, umbrales de activación $\theta_{\sigma_x} = 0.3$, $\theta_{\sigma_y} = 0.7$ y $\theta_{\sigma_z} = 0.8$. Se muestra la solución con respecto a tiempo de $\sigma_z$.}\label{fig:signal3nodos}
 \end{figure}
 
-Se eligió búsqueda aleatoria como estrategia de exploración del espacio de búsqueda, mientras que la función objetivo consistió en minimizar $f_{SI}(X,Y) = 1 -SI(X,Y)$ con $X$ la señal original y $Y$ los datos de la dinámica de Glass del nodo $\sigma_z$ de cada uno de los candidatos propuestos por el algoritmo de búsqueda.
+Se eligió búsqueda aleatoria como estrategia de exploración del espacio de búsqueda, mientras que la función objetivo consistió en minimizar la función objetivo $f_{SI}(X,Y) = 1 -SI(X,Y)$ (definida en la sección \ref{ch2funcObj}) donde $X$ representa la señal original y $Y$ los datos de la dinámica de Glass del nodo $\sigma_z$ de cada uno de los candidatos propuestos por el algoritmo de búsqueda.
 
 \begin{figure}[hbt]
 \includegraphics[width=0.9\linewidth]{gfx/comparacion3Nodos}
 \caption[Dinámicas original y estimada $\sigma_z$]{Dinámicas original y estimada de $\sigma_z$ de la red de 3 nodos. En rojo la señal original, verde y azul representan dos distintas ejecuciones del programa de búsqueda.}\label{fig:resultadoChido3Nodos}
 \end{figure}
 
-En este caso, fue posible recuperar el valor de los tres parámetros de umbral $\theta_{\sigma_x}, \theta_{\sigma_y}, \theta_{\sigma_z}$ en varias ejecuciones del programa de búsqueda. La figura \ref{fig:resultadoChido3Nodos} muestra la dinámica original y el resultado obtenido con dos ejecuciones distintas del programa de busqueda.
+En este caso, fue posible recuperar el valor de los tres parámetros de umbral $\theta_{\sigma_x}, \theta_{\sigma_y}, \theta_{\sigma_z}$ en varias ejecuciones del programa de búsqueda. La figura \ref{fig:resultadoChido3Nodos} muestra la dinámica original y el resultado obtenido con dos ejecuciones distintas del programa de búsqueda.
 
 Se probó realizar la estimación de parámetros para el mismo sistema usando una versión de algoritmos genéticos adaptada a problemas con variables continuas con los parámetros recomendados por omision, tal como se refiere en \citeauthor{Haupt1998} \citep{Haupt1998}. En este caso fue posible recuperar el valor del parámetro de umbral para $\sigma_z$, si bien con una precisión menor.
 % Después tal vez sea bueno agregar los resultados a un apéndice.
@@ -34,26 +34,29 @@ El modelo semicontinuo de la vía de señalización de speract se implementó pl
 A modo de ejemplo, puede considerarse la ecuación de Glass para \acf{gc}. La función Booleana para este nodo de la red es
 
 \begin{eqnarray}
-\ac{gc} & = & F_{\ac{gc}} \left( \ac{SR} \wedge \neg \ac{phi} \right)
+\ac{gc}(t+1) & = & F_{\ac{gc}} \left( \ac{SR}(t) \wedge \neg \ac{phi}(t) \right)
 \end{eqnarray}
 \\
-y la ecuación de Glass correspondiente es
+donde los símbolos $\land$ y $\neg$ representan las funciones lógicas Y (AND) y Negación (NOT), respectivamente.
+\\
+
+La ecuación de Glass correspondiente es
 
 \begin{eqnarray}\label{eqn:glasscGMP}
-\frac{d\ac{gc}}{dt} & = & \alpha_{\ac{gc}} [F_{\ac{gc}}(\widehat{\ac{SR}}, \widehat{\ac{phi}}) - \ac{gc}]
+\frac{d\ac{gc}}{dt} & = & \alpha_{\ac{gc}} [F_{\ac{gc}}(\widehat{\ac{SR}(t)}, \widehat{\ac{phi}(t)}) - \ac{gc}(t)]
 \end{eqnarray}
 \\
 donde
 \begin{eqnarray}
-\widehat{\ac{SR}} & = & H(\ac{SR} - \theta_{\ac{SR}})\\
-\widehat{\ac{phi}} & = & H(\ac{phi} - \theta_{\ac{phi}})
+\widehat{\ac{SR}(t)} & = & H(\ac{SR}(t) - \theta_{\ac{SR}})\\
+\widehat{\ac{phi}(t)} & = & H(\ac{phi}(t) - \theta_{\ac{phi}})
 \end{eqnarray}
 \\
-son los valores discretizados de las variables continuas \acf{SR} y \acf{phi}, respectivamente.
+son los valores discretizados de las variables continuas \acf{SR} y \acf{phi} al tiempo $t$, respectivamente.
 
-El problema de estimación de parámetros en este caso consiste en ajustar el valor de 26 parámetros de umbral $\theta_i$ (22 para los nodos binarios y 4 extras para los nodos que tienen un valor terciario), en el caso de un sistema sincronizado donde todos los parámetros $\alpha_i=x$, $x \in [0,T_{max}]$, donde $T_{max}$ es el tiempo característico más grande del sistema. 
+El problema de estimación de parámetros en el caso de un sistema sincronizado (es decir, todos los parámetros $\alpha_i=x$, $x \in [0,T_{max}]$, donde $T_{max}$ es el tiempo característico más grande del sistema), consiste en ajustar el valor de 26 parámetros de umbral $\theta_i$: 22 para los nodos binarios (aquellos que toman uno de dos valores posibles) y 4 extras para los nodos que tienen un valor terciario (aquellos que toman uno de entre tres valores posibles).
 
-Un problema similar, si bien más complicado, es permitir que cada $\alpha_i$ tome un valor distinto de los demás $\alpha_i$, es decir, un problema asíncrono. El problema asíncrono añade la necesidad de estimar 22 parámetros extra, uno para cada componente del sistema.
+Un problema similar, si bien más complicado, es permitir que cada $\alpha_i$ tome un valor distinto de los demás $\alpha_i$, es decir, un problema asíncrono. El problema asíncrono añade la necesidad de estimar 22 parámetros extra, uno para cada componente del sistema, dando un total de 48 parámetros.
 
 Como una primera aproximación al problema, se consideró el problema sincronizado, estableciendo $\alpha_i = 1.0\ \forall i$, de modo que solo se debió estimar el valor de los 26 parámetros de umbral. Las condiciones iniciales se fijaron tales que al discretizar los valores continuos de la condición inicial, se tuviera una situación muy similar a la del organismo silvestre o \emph{wild type}, es decir, aquél al que no se le ha hecho modificación alguna. Tras la discretización de los valores continuos, la condición inicial del modelo semicontinuo es similar a la condición inicial del modelo discreto presentado en la sección \ref{sect:erizo}, tal y como fue presentada en la figura \ref{fig:appletErizo}.
 
@@ -78,14 +81,14 @@ Se logró ajustar la dinámica del nodo de \ac{ca} de acuerdo a mediciones exper
 
 \begin{figure}[h]
 \includegraphics[width=0.9\linewidth]{gfx/glassChido}
-\caption[Dinámica del nodo de \ac{calintra} del modelo y medición experimental de \ac{ca}]{Dinámica del nodo de \ac{calintra} del modelo y medición experimental de \ac{ca}. En rojo la medición experimental, en azul el ajuste usando la función objetivo basada en la correlación de Pearson. Para efectos de comparación, las series se normalizaron de manera que tuvieran promedio $0$ y varianza $1$.}\label{fig:glassChido}
+\caption[Dinámica del nodo de \ac{calintra} del modelo y medición experimental de \ac{ca}]{Dinámica del nodo de \ac{calintra} del modelo y medición experimental de \ac{ca}. En rojo la medición experimental, en azul el ajuste usando la función objetivo basada en la correlación de Pearson. Para efectos de comparación, ambas series se normalizaron restando su promedio y dividiendo entre su varianza.}\label{fig:glassChido}
 \end{figure}
 
 A pesar de lo alentador de este resultado, el comportamiento dinámico de otros nodos aún necesita mayor revisión. Por ejemplo, el nodo correspondiente al \acf{v} debería de disminuir su valor al inicio de la dinámica para luego aumentarlo. Sin embargo, el potencial aumenta al principio y disminuye posteriormente. Este comportamiento es imposible en la realidad, ya que al haber un aumento de \ac{calintra} el \acf{v} deberia disminuir. Véase la figura \ref{fig:glassChafa}.
 
 \begin{figure}[h]
 \includegraphics[width=0.9\linewidth]{gfx/glassChafa}
-\caption[Dinámica de \ac{calintra}, \ac{v} y otros componentes del modelo, y medición experimental de \ac{ca}]{Dinámica del nodo de \ac{calintra}, \ac{v} y otros componentes del modelo, y medición experimental de \ac{ca}. En este caso en azul punteado se muestra la medición expetimental, en rojo el nodo de \ac{calintra} del modelo y en verde el nodo que representa al \acf{v} en el modelo. Nótese que se trata de una ejecución del algoritmo de búsqueda distinta a la de la figura \ref{fig:glassChido}. Para efectos de comparación, las series se normalizaron de manera que tuvieran promedio $0$ y varianza $1$.}\label{fig:glassChafa}
+\caption[Dinámica de \ac{calintra}, \ac{v} y otros componentes del modelo, y medición experimental de \ac{ca}]{Dinámica del nodo de \ac{calintra}, \ac{v} y otros componentes del modelo, y medición experimental de \ac{ca}. En este caso en azul punteado se muestra la medición experimental, en rojo el nodo de \ac{calintra} del modelo y en verde el nodo que representa al \acf{v} en el modelo. Nótese que se trata de una ejecución del algoritmo de búsqueda distinta a la de la figura \ref{fig:glassChido}. Para efectos de comparación, ambas series se normalizaron restando su promedio y dividiendo entre su varianza.}\label{fig:glassChafa}
 \end{figure}
 
 Varias ejecuciones del algoritmo de evolución diferencial, diferentes parámetros para el mismo algoritmo y funciones objetivo distintas, es decir, usando error cuadrático medio \textsc{mse} o el índice de pendiente \textsc{(si)} arrojaron resultados similares.
